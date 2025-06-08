@@ -7,6 +7,8 @@ import userRouter from './routes/userRoute.js'
 import productRouter from './routes/productRoute.js'
 import cartRouter from './routes/cartRoute.js'
 import orderRouter from './routes/orderRoute.js'
+import { jobRouter } from './routes/jobRouter.js'
+import { contactRouter } from './routes/contact.js'
 
 // App Config
 const app = express()
@@ -23,6 +25,9 @@ app.use('/api/user',userRouter)
 app.use('/api/product',productRouter)
 app.use('/api/cart',cartRouter)
 app.use('/api/order',orderRouter)
+app.use("/api/v1/application", jobRouter);
+app.use("/api/v1/contact", contactRouter);
+
 
 app.get('/',(req,res)=>{
     res.send("API Working")

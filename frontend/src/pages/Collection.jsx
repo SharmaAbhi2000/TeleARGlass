@@ -109,32 +109,32 @@ const Collection = () => {
               <input
                 className="w-3"
                 type="checkbox"
-                value={"Glass"}
+                value={"TeleAR 118X"}
                 onChange={toggleCategory}
               />{" "}
-              Glass
+              TeleAR 118X
             </p>
             <p className="flex gap-2">
               <input
                 className="w-3"
                 type="checkbox"
-                value={"Mobile"}
+                value={"TeleAR 156X"}
                 onChange={toggleCategory}
               />{" "}
-              Mobile
+              TeleAR 156X
             </p>
             <p className="flex gap-2">
               <input
                 className="w-3"
                 type="checkbox"
-                value={"Charger"}
+                value={"TeleAR 269X"}
                 onChange={toggleCategory}
               />{" "}
-              Charger
+              TeleAR 269X
             </p>
           </div>
         </div>
-        {/* SubCategory Filter */}
+        {/* SubCategory Filter
         <div
           className={`border border-gray-300 pl-5 py-3 my-5 ${
             showFilter ? "" : "hidden"
@@ -170,7 +170,7 @@ const Collection = () => {
               ARGlasses
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Right Side */}

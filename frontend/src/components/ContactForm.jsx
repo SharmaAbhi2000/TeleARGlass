@@ -30,9 +30,10 @@ const navigate=useNavigate()
 
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/contact`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/contact/addContact`,
         formData
       );
+
       setSuccess(res.data.message);
       setFormData({
         name: "",
@@ -43,7 +44,6 @@ const navigate=useNavigate()
         time: "",
 
       });
-console.log(res)
       if(res.status==201){
       navigate("/")
       }

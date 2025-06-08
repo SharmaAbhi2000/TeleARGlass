@@ -20,10 +20,10 @@ const Navbar = () => {
     <div className="flex items-center justify-between py-5 font-medium px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
       <Link to="/">
         {" "}
-        <spam className="flex flex-row justify-center items-center space-x-5 ">
+        <span className="flex flex-row justify-center items-center space-x-5 ">
           <img src={assets.logo} className="w-36 rounded-lg " alt="" />
           <p className=" text-xl font-bold ">TeleARGlass</p>{" "}
-        </spam>{" "}
+        </span>{" "}
       </Link>
 
       <ul className="hidden sm:flex gap-5 text-sm text-gray-700">

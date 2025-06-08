@@ -4,20 +4,15 @@ import { Star, Heart, ShoppingCart, Loader2 } from "lucide-react";
 
 
 const products = {
-  name: "Premium Wireless Headphones",
-  originalPrice: 299.99,
-  discountedPrice: 209.99,
+  name: "TeleAR 118X",
+  originalPrice: 1000,
+  discountedPrice: 700,
   rating: 4.8,
   reviews: 1247,
   image: "https://i.postimg.cc/qNPg795R/TELEARGLASS-2.jpg",
-  features: [
-    "Active Noise Cancellation",
-    "30-hour Battery Life",
-    "Premium Sound Quality",
-    "Comfortable Design",
-  ],
+  features: ["9GB RAM", "128GB SSD"],
   description:
-    "Experience premium audio with our latest wireless headphones featuring advanced noise cancellation and exceptional battery life.",
+    "Smart glasses have been advancing significantly across multiple sectors, including design. These wearable gadgets are equipped with the ability to display augmented reality (AR) and mixed reality (MR) content. It possesses the potential to fundamentally transform how designers conceive, cooperate on, and assess their creative endeavors."
 };
 
 

@@ -82,7 +82,7 @@ const quizQuestions = [
 ];
 
 const Recruitment = () => {
-  const [step, setStep] = useState("quiz");
+  const [step, setStep] = useState("form");
   const [answers, setAnswers] = useState(
     new Array(quizQuestions.length).fill("")
   );
@@ -128,7 +128,7 @@ const Recruitment = () => {
     setScore(scorePercent);
 
     if (scorePercent >= 60) {
-      setStep("form");
+      setStep("success");
     } else {
       setStep("fail");
     }
@@ -145,13 +145,11 @@ const Recruitment = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    setStep("success");
+    setStep("quiz");
     const res = await axios.post(
-      `${import.meta.env.BASE_URL}/application/form`,
+      `${import.meta.env.VITE_BACKEND_URL}/api/v1/application/form`,
       { formData }
     );
-    console.log(res);
   };
 
   const resetQuiz = () => {
