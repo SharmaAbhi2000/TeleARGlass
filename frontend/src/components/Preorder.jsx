@@ -1,35 +1,47 @@
-import  { useEffect, useState } from "react";
-import { Star, Heart, ShoppingCart, Loader2 } from "lucide-react";
+import { useContext, useEffect, useState } from "react";
+import { Star, Heart, ShoppingCart } from "lucide-react";
+import { ShopContext } from "../context/ShopContext";
 
 
-
-const products = {
-  name: "TeleAR 118X",
-  originalPrice: 1000,
-  discountedPrice: 700,
-  rating: 4.8,
-  reviews: 1247,
-  image: "https://i.postimg.cc/qNPg795R/TELEARGLASS-2.jpg",
-  features: ["9GB RAM", "128GB SSD"],
-  description:
-    "Smart glasses have been advancing significantly across multiple sectors, including design. These wearable gadgets are equipped with the ability to display augmented reality (AR) and mixed reality (MR) content. It possesses the potential to fundamentally transform how designers conceive, cooperate on, and assess their creative endeavors."
-};
+// const product = {
+//   name: "EcoSmart Wireless Earbuds",
+//   description:
+//   "Experience high-fidelity sound with our EcoSmart Wireless Earbuds featuring noise cancellation and long battery life.",
+//   price: 120,
+//   image: [
+//     "https://i.postimg.cc/qNPg795R/TELEARGLASS-2.jpg",
+//   ],
+//   category: "Electronics",
+//   features: [
+//     "Bluetooth 5.2 connectivity",
+//     "Active noise cancellation",
+//     "24-hour battery life",
+//     "IPX5 water resistance",
+//   ],
+//   bestseller: true,
+//   date: 20240609, // YYYYMMDD format (example)
+//   discountPrice: 89.99,
+// };
 
 
 export default function Preorder() {
+  const {addToCart,products} = useContext(ShopContext);
   const [isWishlisted, setIsWishlisted] = useState(false);
-  const [quantity, setQuantity] = useState(1);
-  const [product, setProduct] = useState(products);
-
-
+  const preorder=products.find((e)=>e.bestseller===true);
+  const [product, setProduct] = useState(null);
   
-
+  useEffect(() => {
+    if (preorder) {
+      setProduct(preorder);
+    }
+  }, [preorder]);
+ if(product==null){
+  return <p>comming soon</p>
+ }
   // Calculate discount percentage
   const discount = product
     ? Math.round(
-        ((product.originalPrice - product.discountedPrice) /
-          product.originalPrice) *
-          100
+        ((product.price - product.discountPrice) / product.price) * 100
       )
     : 0;
 
@@ -98,11 +110,11 @@ export default function Preorder() {
             {/* Product Image */}
             <div className="relative">
               <img
-                src={product.image}
+                src={product.image[0]} // use first image in array
                 alt={product.name}
                 className="w-full h-64 object-cover rounded-lg"
                 onError={(e) => {
-                    //@ts-ignore
+                  //@ts-ignore
                   e.target.src =
                     "https://via.placeholder.com/500x300?text=Product+Image";
                 }}
@@ -134,7 +146,7 @@ export default function Preorder() {
                       <Star
                         key={i}
                         className={`w-4 h-4 ${
-                          i < Math.floor(product.rating)
+                          i < Math.floor(product.rating || 4)
                             ? "fill-yellow-400 text-yellow-400"
                             : "text-gray-300"
                         }`}
@@ -142,7 +154,7 @@ export default function Preorder() {
                     ))}
                   </div>
                   <span className="text-sm text-gray-600">
-                    {product.rating} ({product.reviews} reviews)
+                    {product.rating || "0"} ({product.reviews || "10"} reviews)
                   </span>
                 </div>
               </div>
@@ -156,7 +168,7 @@ export default function Preorder() {
                 </h4>
                 <ul className="space-y-1">
                   {product.features &&
-                    product.features.map((feature, index) => (
+                    JSON.parse(product.features).map((feature, index) => (
                       <li
                         key={index}
                         className="flex items-center space-x-2 text-sm text-gray-600"
@@ -172,23 +184,23 @@ export default function Preorder() {
               <div className="space-y-2">
                 <div className="flex items-center space-x-3">
                   <span className="text-3xl font-bold bg-gradient-to-r from-teal-600 to-emerald-600 bg-clip-text text-transparent">
-                    ${product.discountedPrice}
+                    ${product.discountPrice}
                   </span>
                   <span className="text-lg text-gray-400 line-through">
-                    ${product.originalPrice}
+                    ${product.price}
                   </span>
                 </div>
                 <p className="text-sm text-emerald-600 font-medium">
-                  You save $
-                  {(product.originalPrice - product.discountedPrice).toFixed(2)}
+                  You save ${(product.price - product.discountPrice).toFixed(2)}
                 </p>
               </div>
 
               {/* Quantity and Pre-book Button */}
               <div className="space-y-4">
-               
-
-                <button className="w-full bg-gradient-to-r from-teal-600 via-cyan-600 to-emerald-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-teal-700 hover:via-cyan-700 hover:to-emerald-700 transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl">
+                <button
+                  className="w-full bg-gradient-to-r from-teal-600 via-cyan-600 to-emerald-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-teal-700 hover:via-cyan-700 hover:to-emerald-700 transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
+                  onClick={() => addToCart(product._id, 1)}
+                >
                   <ShoppingCart className="w-5 h-5" />
                   <span>Pre-book Now</span>
                 </button>

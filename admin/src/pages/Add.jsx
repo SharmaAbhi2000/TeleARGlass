@@ -14,6 +14,8 @@ const Add = ({ token }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [discount, setDiscountPrice] = useState("");
+
   const [category, setCategory] = useState("TeleAR 118X");
   const [bestseller, setBestseller] = useState(false);
   const [sizes, setSizes] = useState([]);
@@ -28,6 +30,8 @@ const Add = ({ token }) => {
       formData.append("name", name);
       formData.append("description", description);
       formData.append("price", price);
+      formData.append("discountPrice", discount);
+
       formData.append("category", category);
       formData.append("bestseller", bestseller);
      // formData.append("sizes", JSON.stringify(sizes));
@@ -53,6 +57,8 @@ const Add = ({ token }) => {
         setImage3(false);
         setImage4(false);
         setPrice("");
+
+        setDiscountPrice("");
         // setSizes([]);
         setFeatures([]);
         setFeatureText("");
@@ -164,6 +170,17 @@ const Add = ({ token }) => {
             placeholder="25"
           />
         </div>
+
+        <div>
+          <p className="mb-2">Product Discount Price</p>
+          <input
+            onChange={(e) => setDiscountPrice(e.target.value)}
+            value={discount}
+            className="w-full px-3 py-2 sm:w-[120px]"
+            type="Number"
+            placeholder="25"
+          />
+        </div>
       </div>
 
       {/* <div>
@@ -220,7 +237,7 @@ const Add = ({ token }) => {
           id="bestseller"
         />
         <label className="cursor-pointer" htmlFor="bestseller">
-          Add to bestseller
+          Add to preorder
         </label>
       </div>
 

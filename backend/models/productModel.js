@@ -9,6 +9,7 @@ const productSchema = new mongoose.Schema({
   features: { type: Array, required: false },
   bestseller: { type: Boolean },
   date: { type: Number, required: true },
+  discountPrice: { type: Number, required: true },
 });
 
 const productModel  = mongoose.models.product || mongoose.model("product",productSchema);
