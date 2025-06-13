@@ -4,9 +4,63 @@ import { ShopContext } from '../context/ShopContext';
 import { assets } from '../assets/assets';
 import RelatedProducts from '../components/RelatedProducts';
 import {Check} from "lucide-react"
+
+const reviews = [
+  {
+    name: "John Doe",
+    review: "Great product! Works better than expected.",
+    stars: 5,
+  },
+  {
+    name: "Jane Smith",
+    review: "Solid build and premium feel. Recommended!",
+    stars: 4,
+  },
+  {
+    name: "Alex Johnson",
+    review: "Value for money. Battery lasts long.",
+    stars: 5,
+  },
+  {
+    name: "Emily Davis",
+    review: "Looks great and performs well.",
+    stars: 4,
+  },
+  {
+    name: "Chris Lee",
+    review: "Customer service was helpful.",
+    stars: 3,
+  },
+  {
+    name: "Sara Wilson",
+    review: "Fast delivery and excellent packaging.",
+    stars: 5,
+  },
+  {
+    name: "Daniel Kim",
+    review: "A bit overpriced but still good.",
+    stars: 3,
+  },
+  {
+    name: "Olivia Brown",
+    review: "Perfect for daily use. Highly recommended!",
+    stars: 5,
+  },
+  {
+    name: "Ethan White",
+    review: "Decent product. Can improve build quality.",
+    stars: 3,
+  },
+  {
+    name: "Mia Thomas",
+    review: "I loved it! Will buy again.",
+    stars: 5,
+  },
+];
 const Product = () => {
 
   const { productId } = useParams();
+  const[id,setId]=useState(1);
   const { products, currency ,addToCart } = useContext(ShopContext);
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState('')
@@ -95,26 +149,94 @@ const Product = () => {
 
       {/* ---------- Description & Review Section ------------- */}
       <div className="mt-20">
-        <div className="flex">
-          <b className="border px-5 py-3 text-sm">Description</b>
-          <p className="border px-5 py-3 text-sm">Reviews (122)</p>
+        <div className="flex cursor-pointer ">
+          <b className="border px-5 py-3 text-sm" onClick={() => setId(1)}>
+            Description
+          </b>
+          <p className="border px-5 py-3 text-sm" onClick={() => setId(2)}>
+            Reviews (122)
+          </p>
+          <p className="border px-5 py-3 text-sm" onClick={() => setId(3)}>
+            Features
+          </p>
         </div>
         <div className="flex flex-col gap-4 border px-6 py-6 text-sm text-gray-500">
-          <p>
-            An e-commerce website is an online platform that facilitates the
-            buying and selling of products or services over the internet. It
-            serves as a virtual marketplace where businesses and individuals can
-            showcase their products, interact with customers, and conduct
-            transactions without the need for a physical presence. E-commerce
-            websites have gained immense popularity due to their convenience,
-            accessibility, and the global reach they offer.
-          </p>
-          <p>
-            E-commerce websites typically display products or services along
-            with detailed descriptions, images, prices, and any available
-            variations (e.g., sizes, colors). Each product usually has its own
-            dedicated page with relevant information.
-          </p>
+          {id == 1 ? (
+            <p>{productData.description}</p>
+          ) : id == 3 ? (
+            <table className="min-w-full border border-gray-300 rounded-md overflow-hidden mt-4">
+              <thead>
+                <tr className="bg-gray-100 text-left">
+                  <th className="px-4 py-2 text-gray-700 text-sm font-semibold">
+                    Feature
+                  </th>
+                  <th className="px-4 py-2 text-gray-700 text-sm font-semibold">
+                    Details
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {JSON.parse(productData.features).map((item, index) => {
+                  const [key, value] = item.split(":").map((str) => str.trim());
+                  return (
+                    <tr
+                      key={index}
+                      className={`border-t ${
+                        index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                      } hover:bg-teal-50`}
+                    >
+                      <td className="px-4 py-2 text-sm text-gray-700 font-medium">
+                        {key}
+                      </td>
+                      <td className="px-4 py-2 text-sm text-gray-800 flex items-center">
+                        <Check size={16} className="text-teal-500 mr-2" />
+                        {value}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+              {reviews.map((review, index) => (
+                <div
+                  key={index}
+                  className="bg-white p-4 rounded-xl shadow-md border border-gray-200 hover:shadow-lg transition"
+                >
+                  <div className="flex items-center mb-2">
+                    <div className="h-10 w-10 rounded-full bg-teal-500 text-white flex items-center justify-center font-bold mr-3">
+                      {review.name.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-800">
+                        {review.name}
+                      </p>
+                      <div className="flex">
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <svg
+                            key={i}
+                            className={`w-4 h-4 ${
+                              i < review.stars
+                                ? "text-yellow-400"
+                                : "text-gray-300"
+                            }`}
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path d="M10 15l-5.878 3.09 1.122-6.545L.488 6.91l6.564-.955L10 0l2.948 5.955 6.564.955-4.756 4.635 1.122 6.545z" />
+                          </svg>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    {review.review}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
