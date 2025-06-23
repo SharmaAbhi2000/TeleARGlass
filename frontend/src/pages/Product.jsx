@@ -82,7 +82,7 @@ const Product = () => {
   }, [productId,products])
 
   return productData ? (
-    <div className="border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100">
+    <div className="border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100 bg-gradient-to-br from-teal-600 via-blue-700 to-emerald-600">
       {/*----------- Product Data-------------- */}
       <div className="flex gap-12 sm:gap-12 flex-col sm:flex-row">
         {/*---------- Product Images------------- */}
@@ -104,7 +104,7 @@ const Product = () => {
         </div>
 
         {/* -------- Product Info ---------- */}
-        <div className="flex-1">
+        <div className="flex-1 text-gray-100">
           <h1 className="font-medium text-2xl mt-2">{productData.name}</h1>
           <div className=" flex items-center gap-1 mt-2">
             <img src={assets.star_icon} alt="" className="w-3 5" />
@@ -118,15 +118,15 @@ const Product = () => {
             {currency}
             {productData.price}
           </p>
-          <p className="mt-5 text-gray-500 md:w-4/5">
+          <p className="mt-5 text-gray-100 md:w-4/5">
             {productData.description}
           </p>
           <div className="mb-6">
-            <h3 className="font-semibold text-teal-700 mb-2">Key Features:</h3>
+            <h3 className="font-semibold text-teal-100 mb-2">Key Features:</h3>
             <ul className="space-y-1">
               {JSON.parse(productData.features).map((item, index) => (
-                <li key={index} className="flex items-start text-gray-700">
-                  <Check size={16} className="text-teal-500 mr-2 mt-0.5" />
+                <li key={index} className="flex items-start text-gray-100">
+                  <Check size={16} className="text-teal-100 mr-2 mt-0.5" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -134,12 +134,12 @@ const Product = () => {
           </div>
           <button
             onClick={() => addToCart(productData._id, 1)}
-            className="bg-black text-white px-8 py-3 text-sm active:bg-gray-700"
+            className="bg-black text-white px-8 py-3 text-sm active:bg-gray-200"
           >
             ADD TO CART
           </button>
           <hr className="mt-8 sm:w-4/5" />
-          <div className="text-sm text-gray-500 mt-5 flex flex-col gap-1">
+          <div className="text-sm text-gray-400 mt-5 flex flex-col gap-1">
             <p>100% Original product.</p>
             <p>Cash on delivery is available on this product.</p>
             <p>Easy return and exchange policy within 7 days.</p>
@@ -149,28 +149,28 @@ const Product = () => {
 
       {/* ---------- Description & Review Section ------------- */}
       <div className="mt-20">
-        <div className="flex cursor-pointer ">
-          <b className="border px-5 py-3 text-sm" onClick={() => setId(1)}>
+        <div className="flex cursor-pointer text-gray-100 gap-x-2">
+          <b className="border-b px-5 py-3 text-sm" onClick={() => setId(1)}>
             Description
           </b>
-          <p className="border px-5 py-3 text-sm" onClick={() => setId(2)}>
+          <p className="border-b px-5 py-3 text-sm" onClick={() => setId(2)}>
             Reviews (122)
           </p>
-          <p className="border px-5 py-3 text-sm" onClick={() => setId(3)}>
+          <p className="border-b  px-5 py-3 text-sm" onClick={() => setId(3)}>
             Features
           </p>
         </div>
-        <div className="flex flex-col gap-4 border px-6 py-6 text-sm text-gray-500">
+        <div className="flex flex-col gap-4  px-6 py-6 text-sm text-gray-100">
           {id == 1 ? (
             <p>{productData.description}</p>
           ) : id == 3 ? (
-            <table className="min-w-full border border-gray-300 rounded-md overflow-hidden mt-4">
+            <table className="min-w-full  rounded-md overflow-hidden mt-4">
               <thead>
                 <tr className="bg-gray-100 text-left">
-                  <th className="px-4 py-2 text-gray-700 text-sm font-semibold">
+                  <th className="px-4 py-2 text-gray-100 text-sm font-semibold">
                     Feature
                   </th>
-                  <th className="px-4 py-2 text-gray-700 text-sm font-semibold">
+                  <th className="px-4 py-2 text-gray-100 text-sm font-semibold">
                     Details
                   </th>
                 </tr>
@@ -248,7 +248,7 @@ const Product = () => {
       />
     </div>
   ) : (
-    <div className=" opacity-0"></div>
+    <div className=" opacity-0 bg-gradient-to-br from-teal-600 via-blue-700 to-emerald-600"></div>
   );
 }
 

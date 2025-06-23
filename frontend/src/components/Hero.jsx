@@ -7,7 +7,7 @@ import Button from "./ui/Button";
 
 const Hero = () => {
   return (
-    <div className="rounded-lg  bg-gradient-to-br from-indigo-900 via-teal-800 to-blue-900 text-white">
+    <div className="rounded-lg bg-gradient-to-br from-teal-600 via-blue-700 to-emerald-600 text-white">
       <Container className="py-16 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 max-w-xl">
@@ -29,13 +29,11 @@ const Hero = () => {
                 size="lg"
                 className="bg-emerald-600 hover:bg-emerald-700"
               >
-                <Link to="/products" className="flex items-center gap-2">
+                <Link to="/" className="flex items-center gap-2">
                   Shop Now
                   <ArrowRight size={18} />
                 </Link>
               </Button>
-
-        
             </div>
             <div className="flex items-center space-x-6 text-sm pt-2">
               <div className="flex items-center">

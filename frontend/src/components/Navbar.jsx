@@ -17,7 +17,7 @@ const Navbar = () => {
     }
 
   return (
-    <div className="flex items-center justify-between py-5 font-medium px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
+    <div className="flex items-center justify-between py-5 font-medium px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] ">
       <Link to="/">
         {" "}
         <span className="flex flex-row justify-center items-center space-x-5 ">
@@ -31,11 +31,17 @@ const Navbar = () => {
           <p>HOME</p>
           <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
         </NavLink>
-        <NavLink to="/collection" className="flex flex-col items-center gap-1">
+        <NavLink
+          to="/teleProducts"
+          className="flex flex-col items-center gap-1"
+        >
           <p>TeleProducts</p>
           <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
         </NavLink>
-        <NavLink to="/about" className="flex flex-col items-center gap-1">
+        <NavLink
+          to="/teleServices"
+          className="flex flex-col items-center gap-1"
+        >
           <p>TeleServices</p>
           <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
         </NavLink>
@@ -123,14 +129,14 @@ const Navbar = () => {
           <NavLink
             onClick={() => setVisible(false)}
             className="py-2 pl-6 border"
-            to="/collection"
+            to="/teleProducts"
           >
             COLLECTION
           </NavLink>
           <NavLink
             onClick={() => setVisible(false)}
             className="py-2 pl-6 border"
-            to="/about"
+            to="/teleServices"
           >
             ABOUT
           </NavLink>

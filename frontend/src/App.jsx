@@ -21,31 +21,29 @@ import BgProvider from './BgProvider'
 
 const App = () => {
   return (
-    // <BgProvider>
-      <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[0px]">
-        {/* <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]"> */}
-        <ToastContainer />
-        <Navbar />
-        <SearchBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/collection" element={<Collection />} />
-          <Route path="/recuriment" element={<Recruitment />} />
+    <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[0px] ">
+      {/* <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]"> */}
+      <ToastContainer />
+      <Navbar />
+      <SearchBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/teleProducts" element={<Collection />} />
+        <Route path="/recuriment" element={<Recruitment />} />
 
-          <Route path="/about" element={<About />} />
-          {/* <Route path="/contact" element={<Contact />} /> */}
-          <Route path="/contact" element={<ContactForm />} />
+        <Route path="/teleServices" element={<About />} />
+        {/* <Route path="/contact" element={<Contact />} /> */}
+        <Route path="/contact" element={<ContactForm />} />
 
-          <Route path="/product/:productId" element={<Product />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/place-order" element={<PlaceOrder />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/verify" element={<Verify />} />
-        </Routes>
-        <Footer />
-      </div>
-    // </BgProvider>
+        <Route path="/product/:productId" element={<Product />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/place-order" element={<PlaceOrder />} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/verify" element={<Verify />} />
+      </Routes>
+      <Footer />
+    </div>
   );
 }
 

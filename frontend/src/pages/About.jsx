@@ -1,49 +1,129 @@
-import React from 'react'
-import Title from '../components/Title'
-import { assets } from '../assets/assets'
-import NewsletterBox from '../components/NewsletterBox'
-
+import React from "react";
+import { useNavigate } from "react-router-dom";
 const About = () => {
+  const router=useNavigate();
   return (
-    <div>
+    <div className="min-h-screen bg-gradient-to-br from-teal-600 via-blue-700 to-emerald-600 p-6 font-serif">
+      <div className="max-w-4xl mx-auto">
+        <div className="bg-white shadow-2xl border-2 border-blue-200 p-8 rounded-3xl relative overflow-hidden">
+          {/* Decorative Elements */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-200 to-transparent rounded-full -mr-16 -mt-16 opacity-50"></div>
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-indigo-200 to-transparent rounded-full -ml-12 -mb-12 opacity-50"></div>
 
-      <div className='text-2xl text-center pt-8 border-t'>
-          <Title text1={'ABOUT'} text2={'US'} />
-      </div>
-
-      <div className='my-10 flex flex-col md:flex-row gap-16'>
-          <img className='w-full md:max-w-[450px]' src={assets.about_img} alt="" />
-          <div className='flex flex-col justify-center gap-6 md:w-2/4 text-gray-600'>
-              <p>Forever was born out of a passion for innovation and a desire to revolutionize the way people shop online. Our journey began with a simple idea: to provide a platform where customers can easily discover, explore, and purchase a wide range of products from the comfort of their homes.</p>
-              <p>Since our inception, we've worked tirelessly to curate a diverse selection of high-quality products that cater to every taste and preference. From fashion and beauty to electronics and home essentials, we offer an extensive collection sourced from trusted brands and suppliers.</p>
-              <b className='text-gray-800'>Our Mission</b>
-              <p>Our mission at Forever is to empower customers with choice, convenience, and confidence. We're dedicated to providing a seamless shopping experience that exceeds expectations, from browsing and ordering to delivery and beyond.</p>
+          {/* Title */}
+          <div className="text-center mb-10">
+            <h1 className="text-5xl  font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-2">
+              TeleServices
+            </h1>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full"></div>
           </div>
-      </div>
 
-      <div className=' text-xl py-4'>
-          <Title text1={'WHY'} text2={'CHOOSE US'} />
-      </div>
+          {/* Services Grid */}
+          <div className="grid gap-6 mb-8">
+            {/* Service 1 */}
+            <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-2xl border border-blue-200 hover:shadow-lg transition-all duration-300">
+              <div className="flex items-center mb-4">
+                <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold mr-4">
+                  1
+                </div>
+                <h3 className="text-xl font-bold text-blue-800">
+                  TeleOrientation
+                </h3>
+              </div>
+              <div className="ml-12">
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    href="https://www.youtube.com/watch?v=AA4sS5zEqeg&list=TLGGcYcGan7ykf4yMzA2MjAyNQ"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <span className="bg-blue-200 text-blue-800 px-4 py-2 cursor-pointer rounded-full text-sm font-medium">
+                      TeleWatch
+                    </span>
+                  </a>
+                  <a
+                    href="https://www.youtube.com/watch?v=AA4sS5zEqeg&list=TLGGcYcGan7ykf4yMzA2MjAyNQ&index=1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <span className="bg-blue-200 cursor-pointer text-blue-800 px-4 py-2 rounded-full text-sm font-medium">
+                      TeleBook Live in Store
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
 
-      <div className='flex flex-col md:flex-row text-sm mb-20'>
-          <div className='border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5'>
-            <b>Quality Assurance:</b>
-            <p className=' text-gray-600'>We meticulously select and vet each product to ensure it meets our stringent quality standards.</p>
-          </div>
-          <div className='border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5'>
-            <b>Convenience:</b>
-            <p className=' text-gray-600'>With our user-friendly interface and hassle-free ordering process, shopping has never been easier.</p>
-          </div>
-          <div className='border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5'>
-            <b>Exceptional Customer Service:</b>
-            <p className=' text-gray-600'>Our team of dedicated professionals is here to assist you the way, ensuring your satisfaction is our top priority.</p>
-          </div>
-      </div>
+            {/* Service 2 */}
+            <div className="bg-gradient-to-r from-purple-50 to-purple-100 p-6 rounded-2xl border border-purple-200 hover:shadow-lg transition-all duration-300">
+              <div className="flex items-center mb-4">
+                <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold mr-4">
+                  2
+                </div>
+                <h3 className="text-xl font-bold text-purple-800">
+                  Parijat Services
+                </h3>
+              </div>
+              <p className="ml-12 text-purple-700 leading-relaxed">
+                Comprehensive solutions for software issues in TeleARGlass. Our
+                expert team provides remote diagnostics and troubleshooting to
+                ensure optimal performance.
+              </p>
+            </div>
 
-      <NewsletterBox/>
-      
+            {/* Service 3 */}
+            <div className="bg-gradient-to-r from-green-50 to-green-100 p-6 rounded-2xl border border-green-200 hover:shadow-lg transition-all duration-300">
+              <div className="flex items-center mb-4">
+                <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold mr-4">
+                  3
+                </div>
+                <h3 className="text-xl font-bold text-green-800">
+                  TeleMaintenance
+                </h3>
+              </div>
+              <p className="ml-12 text-green-700 leading-relaxed">
+                Professional repair services for TeleARGlass devices after
+                warranty expiration. Certified technicians ensure quality
+                repairs and extended device longevity.
+              </p>
+            </div>
+
+            {/* Service 4 */}
+            <div className="bg-gradient-to-r from-red-50 to-red-100 p-6 rounded-2xl border border-red-200 hover:shadow-lg transition-all duration-300">
+              <div className="flex items-center mb-4">
+                <div className="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold mr-4">
+                  4
+                </div>
+                <h3 className="text-xl font-bold text-red-800">TeleSecurity</h3>
+              </div>
+              <p className="ml-12 text-red-700 leading-relaxed">
+                Elite cybersecurity specialists dedicated to TeleARGlass
+                protection. Advanced IT security protocols and threat prevention
+                for your augmented reality experience.
+              </p>
+            </div>
+          </div>
+
+          {/* Call to Action */}
+          <div className="bg-gradient-to-r from-indigo-500 to-blue-600 text-white p-6 rounded-2xl text-center mb-6">
+            <h3 className="text-xl font-bold mb-2">Ready to Get Started?</h3>
+            <p className="mb-4 opacity-90">
+              Fill out the customer details form in each section to access our
+              premium TeleServices
+            </p>
+            <button
+              className="bg-white text-indigo-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-300 shadow-lg"
+              onClick={() => router("/contact")}
+            >
+              Get Started Today
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default About
+export default About;
