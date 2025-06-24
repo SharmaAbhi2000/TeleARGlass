@@ -6,6 +6,7 @@ import OurPolicy from '../components/OurPolicy'
 import Testimonials from '../components/Testimonial'
 import Newsletter from '../components/Newsletter'
 import Preorder from '../components/Preorder'
+import Subscribtion from '../components/Subscribtion'
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
       {/* <BestSeller /> */}
       <Preorder />
       <Newsletter />
+      <Subscribtion />
       <OurPolicy />
     </div>
   );

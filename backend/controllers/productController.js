@@ -15,6 +15,7 @@ const addProduct = async (req, res) => {
           features,
           bestseller,
           discountPrice,
+          subscribtion,
         } = req.body;
         const image1 = req.files.image1 && req.files.image1[0]
         const image2 = req.files.image2 && req.files.image2[0]
@@ -31,16 +32,18 @@ const addProduct = async (req, res) => {
         )
 
         const productData = {
-            name,
-            description,
-            price: Number(price),
-            image: imagesUrl,
-            category,
-            features,
-            bestseller: bestseller === "true" ? true : false,
-            date: Date.now(),
-            discountPrice:Number(discountPrice)
-        }
+          name,
+          description,
+          price: Number(price),
+          image: imagesUrl,
+          category,
+          features,
+          bestseller: bestseller === "true" ? true : false,
+          subscribtion: subscribtion === "true" ? true : false,
+
+          date: Date.now(),
+          discountPrice: Number(discountPrice),
+        };
 
        //console.log(productData);
 

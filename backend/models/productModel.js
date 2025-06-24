@@ -8,6 +8,8 @@ const productSchema = new mongoose.Schema({
   category: { type: String, required: true },
   features: { type: Array, required: false },
   bestseller: { type: Boolean },
+  subscribtion: { type: Boolean },
+
   date: { type: Number, required: true },
   discountPrice: { type: Number, required: true },
 });

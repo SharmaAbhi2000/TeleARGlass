@@ -3,26 +3,6 @@ import { Star, Heart, ShoppingCart } from "lucide-react";
 import { ShopContext } from "../context/ShopContext";
 
 
-// const product = {
-//   name: "EcoSmart Wireless Earbuds",
-//   description:
-//   "Experience high-fidelity sound with our EcoSmart Wireless Earbuds featuring noise cancellation and long battery life.",
-//   price: 120,
-//   image: [
-//     "https://i.postimg.cc/qNPg795R/TELEARGLASS-2.jpg",
-//   ],
-//   category: "Electronics",
-//   features: [
-//     "Bluetooth 5.2 connectivity",
-//     "Active noise cancellation",
-//     "24-hour battery life",
-//     "IPX5 water resistance",
-//   ],
-//   bestseller: true,
-//   date: 20240609, // YYYYMMDD format (example)
-//   discountPrice: 89.99,
-// };
-
 
 export default function Preorder() {
   const {addToCart,products} = useContext(ShopContext);
@@ -34,7 +14,7 @@ export default function Preorder() {
     if (preorder) {
       setProduct(preorder);
     }
-  }, [preorder]);
+  }, [products]);
  if(product==null){
   return <p>comming soon</p>
  }

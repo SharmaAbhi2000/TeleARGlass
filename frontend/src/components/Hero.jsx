@@ -29,7 +29,7 @@ const Hero = () => {
                 size="lg"
                 className="bg-emerald-600 hover:bg-emerald-700"
               >
-                <Link to="/" className="flex items-center gap-2">
+                <Link to="teleProducts" className="flex items-center gap-2">
                   Shop Now
                   <ArrowRight size={18} />
                 </Link>

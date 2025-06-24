@@ -18,6 +18,8 @@ const Add = ({ token }) => {
 
   const [category, setCategory] = useState("TeleAR 118X");
   const [bestseller, setBestseller] = useState(false);
+  const [subscribtion, setSubscribtion] = useState(false);
+
   const [sizes, setSizes] = useState([]);
   const [features, setFeatures] = useState([]);
   const [featureText, setFeatureText] = useState("");
@@ -34,6 +36,7 @@ const Add = ({ token }) => {
 
       formData.append("category", category);
       formData.append("bestseller", bestseller);
+      formData.append("subscribtion", subscribtion);
      // formData.append("sizes", JSON.stringify(sizes));
       formData.append("features", JSON.stringify(features));
 
@@ -63,6 +66,8 @@ const Add = ({ token }) => {
         setFeatures([]);
         setFeatureText("");
         setBestseller(false);
+        setSubscribtion(false);
+
       } else {
         toast.error(response.data.message);
       }
@@ -238,6 +243,17 @@ const Add = ({ token }) => {
         />
         <label className="cursor-pointer" htmlFor="bestseller">
           Add to preorder
+        </label>
+      </div>
+      <div className="flex gap-2 mt-2">
+        <input
+          onChange={() => setSubscribtion((prev) => !prev)}
+          checked={subscribtion}
+          type="checkbox"
+          id="subscribtion"
+        />
+        <label className="cursor-pointer" htmlFor="subscribtion">
+          Subscribtion
         </label>
       </div>
 
