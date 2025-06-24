@@ -40,7 +40,9 @@ export default function Subscribtion() {
         <div className="text-center mb-16">
           <div className="flex items-center justify-center mb-4">
             <Shield className="w-12 h-12 text-purple-400 mr-3" />
-            <h1 className="text-4xl font-bold text-white">Premium Plans</h1>
+            <h1 className="text-4xl font-bold text-white">
+              B2B licence subscription
+            </h1>
           </div>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Unlock the full potential of our platform with premium features
@@ -59,7 +61,7 @@ export default function Subscribtion() {
                   : "text-gray-400 hover:text-white"
               }`}
             >
-              Monthly
+              Yearly
             </button>
             <button
               onClick={() => setBillingCycle("yearly")}
@@ -69,7 +71,7 @@ export default function Subscribtion() {
                   : "text-gray-400 hover:text-white"
               }`}
             >
-              Yearly
+              10 Years
               <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-1.5 py-0.5 rounded-full">
                 Save 17%
               </span>
@@ -101,9 +103,7 @@ export default function Subscribtion() {
                 <div
                   className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r ${plan.color} mb-4`}
                 >
-                  <div className="text-white">
-                    {iconMap[plan.icon]}
-                  </div>
+                  <div className="text-white">{iconMap[plan.icon]}</div>
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">
                   {plan.name}
