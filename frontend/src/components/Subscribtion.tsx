@@ -118,7 +118,7 @@ export default function Subscribtion() {
                     ${billingCycle === "monthly" ? plan.price : plan.price}
                   </span>
                   <span className="text-gray-400 ml-2">
-                    /{billingCycle === "monthly" ? "month" : "year"}
+                    /{billingCycle === "monthly" ? "year" : "10 year"}
                   </span>
                 </div>
                 {billingCycle === "yearly" && (
