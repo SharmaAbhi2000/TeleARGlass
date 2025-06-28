@@ -7,12 +7,13 @@ import Testimonials from '../components/Testimonial'
 import Newsletter from '../components/Newsletter'
 import Preorder from '../components/Preorder'
 import Subscribtion from '../components/Subscribtion'
+import BannerForSubscribtion from '../components/BannerForSubscribtion'
 
 const Home = () => {
   return (
     <div className="">
       <Hero />
-      <Subscribtion />
+      <BannerForSubscribtion />
       <LatestCollection />
       <Testimonials />
       {/* <BestSeller /> */}

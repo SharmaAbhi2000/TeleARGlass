@@ -34,10 +34,10 @@ export default function Subscribtion() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-600 via-blue-700 to-emerald-600 py-12 px-4">
+    <div className=" py-2  px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
+        {/* <div className="text-center mb-16">
           <div className="flex items-center justify-center mb-4">
             <Shield className="w-12 h-12 text-purple-400 mr-3" />
             <h1 className="text-4xl font-bold text-white">
@@ -48,43 +48,14 @@ export default function Subscribtion() {
             Unlock the full potential of our platform with premium features
             designed to accelerate your success
           </p>
-        </div>
-
-        {/* Billing Toggle */}
-        <div className="flex items-center justify-center mb-12">
-          <div className="bg-slate-800 rounded-lg p-1 flex items-center">
-            <button
-              onClick={() => setBillingCycle("monthly")}
-              className={`px-6 py-2 rounded-md text-sm font-medium transition-all ${
-                billingCycle === "monthly"
-                  ? "bg-purple-600 text-white shadow-lg"
-                  : "text-gray-400 hover:text-white"
-              }`}
-            >
-              Yearly
-            </button>
-            <button
-              onClick={() => setBillingCycle("yearly")}
-              className={`px-6 py-2 rounded-md text-sm font-medium transition-all relative ${
-                billingCycle === "yearly"
-                  ? "bg-purple-600 text-white shadow-lg"
-                  : "text-gray-400 hover:text-white"
-              }`}
-            >
-              10 Years
-              <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-1.5 py-0.5 rounded-full">
-                Save 17%
-              </span>
-            </button>
-          </div>
-        </div>
+        </div> */}
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className=" w-full flex justify-center items-center  ">
           {plans.map((plan) => (
             <div
               key={plan.id}
-              className={`relative bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border transition-all duration-300 hover:scale-105 ${
+              className={`relative w-full lg:w-96  items-center bg-blue-800/50 backdrop-blur-sm rounded-2xl p-8   transition-all duration-300 hover:scale-105 ${
                 plan.popular
                   ? "border-purple-500 shadow-2xl shadow-purple-500/20"
                   : "border-slate-700 hover:border-slate-600"
@@ -115,7 +86,7 @@ export default function Subscribtion() {
               <div className="text-center mb-8">
                 <div className="flex items-baseline justify-center">
                   <span className="text-5xl font-bold text-white">
-                    ${billingCycle === "monthly" ? plan.price : plan.price}
+                    ₹{Number(String(plan.price)[0])} Cr
                   </span>
                   <span className="text-gray-400 ml-2">
                     /{billingCycle === "monthly" ? "year" : "10 year"}
@@ -123,7 +94,7 @@ export default function Subscribtion() {
                 </div>
                 {billingCycle === "yearly" && (
                   <p className="text-green-400 text-sm mt-2">
-                    Save ${plan.monthlyPrice * 12 - plan.yearlyPrice} annually
+                    Save ₹{plan.monthlyPrice * 12 - plan.yearlyPrice} annually
                   </p>
                 )}
               </div>
@@ -148,7 +119,7 @@ export default function Subscribtion() {
                     : "bg-slate-700 hover:bg-slate-600 border border-slate-600"
                 }`}
               >
-                {plan.popular ? "Start Free Trial" : "Get Started"}
+                {plan.popular ? "Start Free Trial" : "Subscribe"}
               </button>
 
               {plan.popular && (
