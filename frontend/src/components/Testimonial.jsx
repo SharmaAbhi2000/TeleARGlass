@@ -28,7 +28,7 @@ const Testimonials = () => {
       <Container>
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-teal-700 mb-4">
-            What Our Customers Say
+            TeleExpert Review
           </h2>
           <p className="text-cyan-700 max-w-2xl mx-auto">
             Don't just take our word for it – here's what customers think about
