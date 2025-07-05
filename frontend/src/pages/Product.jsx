@@ -153,9 +153,9 @@ const Product = () => {
           <b className="border-b px-5 py-3 text-sm" onClick={() => setId(1)}>
             Description
           </b>
-          <p className="border-b px-5 py-3 text-sm" onClick={() => setId(2)}>
+          {/* <p className="border-b px-5 py-3 text-sm" onClick={() => setId(2)}>
             Reviews (122)
-          </p>
+          </p> */}
           <p className="border-b  px-5 py-3 text-sm" onClick={() => setId(3)}>
             Features
           </p>
@@ -199,7 +199,7 @@ const Product = () => {
             </table>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-              {reviews.map((review, index) => (
+              {/* {reviews.map((review, index) => (
                 <div
                   key={index}
                   className="bg-white p-4 rounded-xl shadow-md border border-gray-200 hover:shadow-lg transition"
@@ -234,7 +234,7 @@ const Product = () => {
                     {review.review}
                   </p>
                 </div>
-              ))}
+              ))} */}
             </div>
           )}
         </div>
