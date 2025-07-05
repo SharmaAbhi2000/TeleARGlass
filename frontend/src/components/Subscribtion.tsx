@@ -36,19 +36,7 @@ export default function Subscribtion() {
   return (
     <div className=" py-2  px-4">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        {/* <div className="text-center mb-16">
-          <div className="flex items-center justify-center mb-4">
-            <Shield className="w-12 h-12 text-purple-400 mr-3" />
-            <h1 className="text-4xl font-bold text-white">
-              B2B licence subscription
-            </h1>
-          </div>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Unlock the full potential of our platform with premium features
-            designed to accelerate your success
-          </p>
-        </div> */}
+      
 
         {/* Pricing Cards */}
         <div className=" w-full flex justify-center items-center  ">
@@ -99,15 +87,6 @@ export default function Subscribtion() {
                 )}
               </div>
 
-              {/* Features */}
-              <div className="space-y-4 mb-8">
-                {JSON.parse(plan.features).map((feature, index) => (
-                  <div key={index} className="flex items-start">
-                    <Check className="w-5 h-5 text-green-400 mr-3 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-300 text-sm">{feature}</span>
-                  </div>
-                ))}
-              </div>
 
               {/* CTA Button */}
               <button

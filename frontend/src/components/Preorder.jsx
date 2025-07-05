@@ -73,12 +73,9 @@ export default function Preorder() {
                 </li>
                 <li className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-gradient-to-r from-cyan-300 to-emerald-300 rounded-full"></div>
-                  <span>Free premium accessories worth $50</span>
+                  <span>5% additional discount on orginal price on preorder.</span>
                 </li>
-                <li className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-gradient-to-r from-cyan-300 to-emerald-300 rounded-full"></div>
-                  <span>30-day money-back guarantee</span>
-                </li>
+               
               </ul>
             </div>
           </div>

@@ -7,6 +7,7 @@ import {
   Mail,
   Phone,
   MapPin,
+  Linkedin,
 } from "lucide-react";
 import Container from "./ui/Container";
 import { assets } from "../assets/assets";
@@ -30,13 +31,21 @@ const Footer = () => {
               Serving humanity through technology.
             </p>
             <div className="flex space-x-4 mt-2">
-              <a href="#" className="hover:text-sky-400 transition-colors">
-                <Facebook size={20} />
+             
+              <a
+                href="https://www.linkedin.com/in/jayeshpateltelearglass"
+                className="hover:text-sky-400 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Linkedin size={20} />
               </a>
-              <a href="#" className="hover:text-sky-400 transition-colors">
-                <Twitter size={20} />
-              </a>
-              <a href="#" className="hover:text-sky-400 transition-colors">
+              <a
+                href="https://www.instagram.com/jayeshpateltelearglass"
+                className="hover:text-sky-400 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Instagram size={20} />
               </a>
             </div>

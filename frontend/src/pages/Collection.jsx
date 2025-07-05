@@ -83,7 +83,7 @@ const productSell=products.filter((e)=>e.subscribtion==false && e.bestseller==fa
   },[sortType])
 
   return (
-    <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] bg-gradient-to-br from-teal-600 via-blue-700 to-emerald-600 py-10">
+    <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] bg-gradient-to-b from-teal-50 via-cyan-50 to-violet-50 py-10">
       {/* Filter Options */}
       <div className="min-w-60">
         <p
@@ -104,37 +104,36 @@ const productSell=products.filter((e)=>e.subscribtion==false && e.bestseller==fa
           } sm:block`}
         >
           <p className="mb-3 text-sm font-medium">CATEGORIES</p>
-          <div className="flex flex-col gap-2 text-sm font-light text-gray-100">
+          <div className="flex flex-col gap-2 text-sm font-light text-black">
             <p className="flex gap-2">
               <input
                 className="w-3"
                 type="checkbox"
-                value={"TeleAR 118X"}
+                value={"Home Automation"}
                 onChange={toggleCategory}
               />{" "}
-              TeleAR 118X
+              Home Automation
             </p>
             <p className="flex gap-2">
               <input
                 className="w-3"
                 type="checkbox"
-                value={"TeleAR 156X"}
+                value={"Gaming"}
                 onChange={toggleCategory}
               />{" "}
-              TeleAR 156X
+              Gaming
             </p>
             <p className="flex gap-2">
               <input
                 className="w-3"
                 type="checkbox"
-                value={"TeleAR 269X"}
+                value={"Legacy"}
                 onChange={toggleCategory}
-              />{" "}
-              TeleAR 269X
+              />
+              Legacy
             </p>
           </div>
         </div>
-      
       </div>
 
       {/* Right Side */}

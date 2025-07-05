@@ -191,7 +191,7 @@ const Recruitment = () => {
               </div>
             </div>
             <h1 className="text-4xl font-bold bg-gradient-to-r from-yellow-300 via-emerald-300 to-teal-300 bg-clip-text text-transparent mb-2">
-              Recruitment Portal
+             Expert Recruitment Portal
             </h1>
             <p className="text-teal-100 text-lg">
               Join our elite team of developers

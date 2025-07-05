@@ -15,7 +15,6 @@ const About = () => {
             <h1 className="text-5xl  font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-2">
               TeleServices
             </h1>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full"></div>
           </div>
 
           {/* Services Grid */}
@@ -43,9 +42,8 @@ const About = () => {
                     </span>
                   </a>
                   <a
-                    href="https://www.youtube.com/watch?v=AA4sS5zEqeg&list=TLGGcYcGan7ykf4yMzA2MjAyNQ&index=1"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="contact"
+                  
                     className="block"
                   >
                     <span className="bg-blue-200 cursor-pointer text-blue-800 px-4 py-2 rounded-full text-sm font-medium">
@@ -107,7 +105,7 @@ const About = () => {
           </div>
 
           {/* Call to Action */}
-          <div className="bg-gradient-to-r from-indigo-500 to-blue-600 text-white p-6 rounded-2xl text-center mb-6">
+          {/* <div className="bg-gradient-to-r from-indigo-500 to-blue-600 text-white p-6 rounded-2xl text-center mb-6">
             <h3 className="text-xl font-bold mb-2">Ready to Get Started?</h3>
             <p className="mb-4 opacity-90">
               Fill out the customer details form in each section to access our
@@ -119,7 +117,7 @@ const About = () => {
             >
               Get Started Today
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

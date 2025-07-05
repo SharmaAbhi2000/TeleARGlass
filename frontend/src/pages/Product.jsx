@@ -82,7 +82,7 @@ const Product = () => {
   }, [productId,products])
 
   return productData ? (
-    <div className="border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100 bg-gradient-to-br from-teal-600 via-blue-700 to-emerald-600">
+    <div className="border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100 bg-gradient-to-b from-teal-50 via-cyan-50 to-violet-50">
       {/*----------- Product Data-------------- */}
       <div className="flex gap-12 sm:gap-12 flex-col sm:flex-row">
         {/*---------- Product Images------------- */}
@@ -93,18 +93,18 @@ const Product = () => {
                 onClick={() => setImage(item)}
                 src={item}
                 key={index}
-                className="w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer"
+                className="w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer rounded-md"
                 alt=""
               />
             ))}
           </div>
           <div className="w-full sm:w-[80%]">
-            <img className="w-full h-auto" src={image} alt="" />
+            <img className="w-full h-auto rounded-md " src={image} alt="" />
           </div>
         </div>
 
         {/* -------- Product Info ---------- */}
-        <div className="flex-1 text-gray-100">
+        <div className="flex-1 text-black">
           <h1 className="font-medium text-2xl mt-2">{productData.name}</h1>
           <div className=" flex items-center gap-1 mt-2">
             <img src={assets.star_icon} alt="" className="w-3 5" />
@@ -118,15 +118,15 @@ const Product = () => {
             {currency}
             {productData.price}
           </p>
-          <p className="mt-5 text-gray-100 md:w-4/5">
+          <p className="mt-5 text-black md:w-4/5">
             {productData.description}
           </p>
           <div className="mb-6">
-            <h3 className="font-semibold text-teal-100 mb-2">Key Features:</h3>
+            <h3 className="font-semibold text-teal-500 mb-2">Key Features:</h3>
             <ul className="space-y-1">
               {JSON.parse(productData.features).map((item, index) => (
-                <li key={index} className="flex items-start text-gray-100">
-                  <Check size={16} className="text-teal-100 mr-2 mt-0.5" />
+                <li key={index} className="flex items-start text-black">
+                  <Check size={16} className="text-teal-500 mr-2 mt-0.5" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -134,7 +134,7 @@ const Product = () => {
           </div>
           <button
             onClick={() => addToCart(productData._id, 1)}
-            className="bg-black text-white px-8 py-3 text-sm active:bg-gray-200"
+            className="bg-blue-400 rounded text-black px-8 py-3 text-sm active:bg-gray-200"
           >
             ADD TO CART
           </button>
@@ -149,7 +149,7 @@ const Product = () => {
 
       {/* ---------- Description & Review Section ------------- */}
       <div className="mt-20">
-        <div className="flex cursor-pointer text-gray-100 gap-x-2">
+        <div className="flex cursor-pointer text-black gap-x-2">
           <b className="border-b px-5 py-3 text-sm" onClick={() => setId(1)}>
             Description
           </b>
@@ -160,17 +160,17 @@ const Product = () => {
             Features
           </p>
         </div>
-        <div className="flex flex-col gap-4  px-6 py-6 text-sm text-gray-100">
+        <div className="flex flex-col gap-4  px-6 py-6 text-sm text-black">
           {id == 1 ? (
             <p>{productData.description}</p>
           ) : id == 3 ? (
             <table className="min-w-full  rounded-md overflow-hidden mt-4">
               <thead>
                 <tr className="bg-gray-100 text-left">
-                  <th className="px-4 py-2 text-gray-100 text-sm font-semibold">
+                  <th className="px-4 py-2 text-black text-sm font-semibold">
                     Feature
                   </th>
-                  <th className="px-4 py-2 text-gray-100 text-sm font-semibold">
+                  <th className="px-4 py-2 text-black text-sm font-semibold">
                     Details
                   </th>
                 </tr>
@@ -205,7 +205,7 @@ const Product = () => {
                   className="bg-white p-4 rounded-xl shadow-md border border-gray-200 hover:shadow-lg transition"
                 >
                   <div className="flex items-center mb-2">
-                    <div className="h-10 w-10 rounded-full bg-teal-500 text-white flex items-center justify-center font-bold mr-3">
+                    <div className="h-10 w-10 rounded-full bg-teal-500 text-black flex items-center justify-center font-bold mr-3">
                       {review.name.charAt(0)}
                     </div>
                     <div>

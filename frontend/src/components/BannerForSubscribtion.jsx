@@ -27,7 +27,7 @@ export default function BannerForSubscribtion() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-teal-600 via-blue-700 to-emerald-600 overflow-hidden">
+    <div className="relative min-h-screen bg-gradient-to-b from-teal-50 via-cyan-50 to-violet-50 overflow-hidden">
       {/* Animated Background Pattern */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-emerald-400 to-teal-600 rounded-full blur-3xl animate-pulse"></div>
@@ -59,8 +59,9 @@ export default function BannerForSubscribtion() {
           }`}
         >
           <div className="flex justify-center items-center mb-6">
-            <div className="relative">
-              <Glasses className="w-16 h-16 text-emerald-400 animate-bounce" />
+            <div className="relative  ">
+              <img src={"logo.jpeg"} className="w-32 h-16 rounded-xl " />
+              {/* <Glasses className="w-16 h-16 text-emerald-400 animate-bounce" /> */}
               <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full animate-ping"></div>
             </div>
           </div>
@@ -80,7 +81,7 @@ export default function BannerForSubscribtion() {
             isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
-          <div className="backdrop-blur-xl bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
+          <div className="backdrop-blur-xl bg-gradient-to-br from-teal-600/80 via-blue-700/80 to-emerald-600/80 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
             {/* Innovation Header */}
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
@@ -96,9 +97,6 @@ export default function BannerForSubscribtion() {
             {/* Technology Description */}
             <div className="grid md:grid-cols-2 gap-12 items-center mb-12">
               <div>
-                <h3 className="text-2xl md:text-3xl font-bold text-emerald-300 mb-6">
-                  Advanced Technology Stack
-                </h3>
                 <div className="space-y-4 text-lg text-gray-200">
                   <p>
                     <span className="text-cyan-300 font-semibold">
