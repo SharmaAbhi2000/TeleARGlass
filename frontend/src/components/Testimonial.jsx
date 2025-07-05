@@ -4,30 +4,21 @@ import Container from "./ui/Container";
 const testimonials = [
   {
     id: 1,
-    name: "Sarah Johnson",
-    role: "Software Engineer",
+    name: "Varun Yadav",
+    role: "Microsoft for Startups Mentor",
     content:
-      "I've purchased multiple devices from TechHub and have always been impressed with their quality and fast shipping. The UltraBook Pro X1 exceeded all my expectations!",
+     "From his words. Very Good product, he personally would like & many others “you tube skip feature” from thinking thus they do not want interruption to their core work.",
     avatar:
       "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   },
   {
     id: 2,
-    name: "Michael Chen",
-    role: "Digital Content Creator",
+    name: "Jiten Thakkar",
+    role: "Swarrnim Incubation Manager, Registered Indian Patent Agent",
     content:
-      "The customer service at TechHub is unmatched. When I had an issue with my order, they resolved it immediately. Will definitely be a returning customer.",
+    "He filed my TeleARGlass industrial design Patent in India. He said “awesome design in terms of Brain-Technology Interface Products” & I should leverage the IP rights.",
     avatar:
       "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  },
-  {
-    id: 3,
-    name: "Emily Rodriguez",
-    role: "UX Designer",
-    content:
-      "As a designer, I need reliable tech that won't let me down. The tablet I purchased from TechHub has been perfect for my workflow and client presentations.",
-    avatar:
-      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   },
 ];
 
@@ -45,7 +36,7 @@ const Testimonials = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="flex min-w-40 justify-center items-center  gap-8">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
@@ -67,11 +58,11 @@ const Testimonials = () => {
                 "{testimonial.content}"
               </p>
               <div className="flex items-center">
-                <img
+                {/* <img
                   src={testimonial.avatar}
                   alt={testimonial.name}
                   className="w-12 h-12 rounded-full object-cover mr-4 border-2 border-teal-400"
-                />
+                /> */}
                 <div>
                   <p className="font-medium text-teal-800">
                     {testimonial.name}
