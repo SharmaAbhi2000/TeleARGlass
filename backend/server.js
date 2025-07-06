@@ -30,7 +30,7 @@ app.use("/api/v1/contact", contactRouter);
 
 
 app.get('/',(req,res)=>{
-    res.send("API Workingss")
+    res.send("API Workings")
 })
 
 app.listen(port, ()=> console.log('Server started on PORT : '+ port))
