@@ -66,7 +66,7 @@ export default function BannerForSubscribtion() {
             </div>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold text-purple-600 bg-clip-text text-transparent mb-4 ">
+          <h1 className="text-5xl md:text-7xl font-bold text-purple-600 bg-clip-text mb-4 ">
             TeleARGlass
           </h1>
 
