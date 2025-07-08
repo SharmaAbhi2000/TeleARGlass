@@ -31,8 +31,7 @@ const Testimonials = () => {
             TeleExpert Review
           </h2>
           <p className="text-cyan-700 max-w-2xl mx-auto">
-            Don't just take our word for it – here's what customers think about
-            their TechHub experience.
+            As per Our current TeleARGlass Trials
           </p>
         </div>
 

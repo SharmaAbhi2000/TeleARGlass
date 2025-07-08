@@ -60,17 +60,17 @@ export default function BannerForSubscribtion() {
         >
           <div className="flex justify-center items-center mb-6">
             <div className="relative  ">
-              <img src={"logo.jpeg"} className="w-32 h-16 rounded-xl " />
+              <img src={"logo.jpeg"} className="w-64 h-32 rounded-xl " />
               {/* <Glasses className="w-16 h-16 text-emerald-400 animate-bounce" /> */}
               <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full animate-ping"></div>
             </div>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400 bg-clip-text text-transparent mb-4 animate-pulse">
+          <h1 className="text-5xl md:text-7xl font-bold text-purple-600 bg-clip-text text-transparent mb-4 ">
             TeleARGlass
           </h1>
 
-          <div className="text-2xl md:text-3xl font-semibold text-cyan-300 mb-8">
+          <div className="text-2xl md:text-3xl font-semibold text-orange-500  mb-8">
             Patent Licensing
           </div>
         </div>
@@ -99,16 +99,16 @@ export default function BannerForSubscribtion() {
               <div>
                 <div className="space-y-4 text-lg text-gray-200">
                   <p>
-                    <span className="text-cyan-300 font-semibold">
+                    <span className="text-purple-400 font-semibold">
                       TeleARGlass
                     </span>{" "}
                     works with cutting-edge technology using our proprietary
-                    <span className="text-emerald-400 font-semibold">
+                    <span className="text-purple-400 font-semibold">
                       {" "}
                       PanOS Operating System
                     </span>{" "}
                     and its customizable range of
-                    <span className="text-blue-400 font-semibold">
+                    <span className="text-purple-400 font-semibold">
                       {" "}
                       30+ Product Software Apps
                     </span>
@@ -120,7 +120,7 @@ export default function BannerForSubscribtion() {
                       Immersive Augmented Reality (AR) Display
                     </span>
                     , advanced{" "}
-                    <span className="text-pink-400 font-semibold">
+                    <span className="text-purple-400 font-semibold">
                       Speaking Accessibility
                     </span>{" "}
                     features, and much more.
@@ -157,7 +157,16 @@ export default function BannerForSubscribtion() {
                     Customizable Software
                   </div>
                   <div className="text-gray-300 text-sm">
-                    Highly adaptable TeleARGlass software suite
+                    <ul className="text-left list-disc " >
+                      <li>ISRO Space Communication</li>
+                      <li>Defence Research & Development Organisation(DRDO)</li>
+                      <li>TeleARGlass Legacy Inbuilt Mobile</li>
+                      <li>Accessibility</li>
+                      <li>Social Media</li>
+                      <li>Gaming </li>
+                      <li>Home Automation</li>
+                      <li>Robotics</li>
+                    </ul>
                   </div>
                 </div>
 
@@ -165,27 +174,27 @@ export default function BannerForSubscribtion() {
                   <div className="text-blue-400 font-bold text-lg mb-2">
                     Aesthetic Design
                   </div>
-                  <div className="text-gray-300 text-sm">
+                  {/* <div className="text-gray-300 text-sm">
                     Beautiful aesthetics & ergonomic design
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="p-6 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-400/30">
                   <div className="text-purple-400 font-bold text-lg mb-2">
                     AI Interpretation
                   </div>
-                  <div className="text-gray-300 text-sm">
+                  {/* <div className="text-gray-300 text-sm">
                     Advanced AI data interpretation techniques
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="p-6 rounded-xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 border border-indigo-400/30">
                   <div className="text-indigo-400 font-bold text-lg mb-2">
                     Sensor Design
                   </div>
-                  <div className="text-gray-300 text-sm">
+                  {/* <div className="text-gray-300 text-sm">
                     Sophisticated data capturing sensor design
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

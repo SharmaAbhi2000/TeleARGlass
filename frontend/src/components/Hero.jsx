@@ -16,11 +16,11 @@ const Hero = () => {
                 New Products Available
               </span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-purple-300  ">
               Serving humanity through technology.
             </h1>
             <p className="text-gray-200 text-lg md:text-xl">
-              Explore our collection of cutting-edge TeleAR Glasses.
+              Explore the TeleARGlass products How it will cater your needs.
             </p>
             <div className="flex flex-wrap gap-4 pt-2">
               <Button
@@ -30,7 +30,7 @@ const Hero = () => {
                 className="bg-emerald-600 hover:bg-emerald-700"
               >
                 <Link to="teleProducts" className="flex items-center gap-2">
-                  Shop Now
+                  TelePurchase Now
                   <ArrowRight size={18} />
                 </Link>
               </Button>

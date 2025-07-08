@@ -36,8 +36,6 @@ export default function Subscribtion() {
   return (
     <div className=" py-2  px-4">
       <div className="max-w-7xl mx-auto">
-      
-
         {/* Pricing Cards */}
         <div className=" w-full flex justify-center items-center  ">
           {plans.map((plan) => (
@@ -59,24 +57,24 @@ export default function Subscribtion() {
 
               {/* Plan Header */}
               <div className="text-center mb-8">
-                <div
+                {/* <div
                   className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r ${plan.color} mb-4`}
                 >
                   <div className="text-white">{iconMap[plan.icon]}</div>
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2">
+                </div> */}
+                {/* <h3 className="text-2xl font-bold text-white mb-2">
                   {plan.name}
-                </h3>
-                <p className="text-gray-400 text-sm">{plan.description}</p>
+                </h3> */}
+                <p className="text-gray-200 text-md">{plan.description}</p>
               </div>
 
               {/* Pricing */}
               <div className="text-center mb-8">
                 <div className="flex items-baseline justify-center">
-                  <span className="text-5xl font-bold text-white">
+                  <span className="text-5xl font-bold text-purple-400">
                     ₹{Number(String(plan.price)[0])} Cr
                   </span>
-                  <span className="text-gray-400 ml-2">
+                  <span className="text-purple-400 ml-2">
                     /{billingCycle === "monthly" ? "year" : "10 year"}
                   </span>
                 </div>
@@ -87,25 +85,14 @@ export default function Subscribtion() {
                 )}
               </div>
 
-
               {/* CTA Button */}
               <button
                 onClick={() => handleSubscribe(plan)}
                 onMouseEnter={() => setSelectedPlan(plan.id)}
-                className={`w-full py-4 px-6 rounded-xl font-semibold text-white transition-all duration-300 ${
-                  plan.popular
-                    ? "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 shadow-lg hover:shadow-xl"
-                    : "bg-slate-700 hover:bg-slate-600 border border-slate-600"
-                }`}
+                className="w-full py-4 px-6 bg-emerald-600 hover:bg-emerald-700 rounded-xl font-semibold text-white transition-all duration-300"
               >
-                {plan.popular ? "Start Free Trial" : "Subscribe"}
+                Subscribe
               </button>
-
-              {plan.popular && (
-                <p className="text-center text-gray-400 text-xs mt-3">
-                  14-day free trial • No credit card required
-                </p>
-              )}
             </div>
           ))}
         </div>

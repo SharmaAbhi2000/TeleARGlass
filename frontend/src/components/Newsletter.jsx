@@ -33,11 +33,12 @@ const Newsletter = () => {
             </span>
           </div>
           <h2 className="text-3xl font-bold text-teal-700 mb-4">
-            Stay Updated on New Products
+            Stay Updated with our new Tele products
           </h2>
           <p className="text-cyan-700 mb-8">
-            Subscribe to our newsletter to receive updates on new products,
-            exclusive offers, and tech tips. We promise not to spam your inbox!
+            We thrive by continuous improvement at TeleARGlass by Innovation &
+            Sustainability. That We apply in New TeleProducts with performance
+            as per current Teleconsumers needs.
           </p>
 
           {submitted ? (

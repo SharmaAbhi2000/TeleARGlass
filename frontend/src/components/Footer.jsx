@@ -31,7 +31,6 @@ const Footer = () => {
               Serving humanity through technology.
             </p>
             <div className="flex space-x-4 mt-2">
-             
               <a
                 href="https://www.linkedin.com/in/jayeshpateltelearglass"
                 className="hover:text-sky-400 transition-colors"
@@ -64,7 +63,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/products" className="hover:text-sky-400 transition">
-                  TeleShop
+                  TeleProducts
                 </Link>
               </li>
               <li>
@@ -140,7 +139,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <Mail size={18} className="mr-2 text-sky-400" />
-                jamespatel1992@yahoo.com
+                jayeshpatel@telearglass.com
               </li>
             </ul>
           </div>

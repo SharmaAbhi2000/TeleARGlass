@@ -15,11 +15,11 @@ const LatestCollection = () => {
   return (
     <div className="my-10 px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] ">
       <div className="text-center py-8 text-3xl">
-        <Title text1={"Featured "} text2={"Products"} />
-        <p className="w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600">
+        <Title text1={"Featured "} text2={"TeleProducts"} />
+        {/* <p className="w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600">
           Discover our selection of premium TeleARGlass products, carefully
           curated for quality and performance
-        </p>
+        </p> */}
       </div>
 
       {/* Rendering Products */}

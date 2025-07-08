@@ -44,7 +44,7 @@ export default function Preorder() {
             </h1>
             <div className="flex items-center space-x-2">
               <span className="text-3xl md:text-5xl font-bold text-cyan-300">
-                Get {discount}% OFF
+                with 29% Payment
               </span>
               <div className="bg-gradient-to-r from-cyan-300 to-emerald-300 text-teal-900 px-3 py-1 rounded-full text-sm font-semibold">
                 Limited Time
@@ -53,10 +53,7 @@ export default function Preorder() {
           </div>
 
           <div className="space-y-4">
-            <p className="text-lg opacity-90">
-              Be among the first to experience our latest product launch.
-              Pre-book now and save big!
-            </p>
+          
 
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 space-y-3 border border-cyan-300/20">
               <h3 className="font-semibold text-lg text-cyan-200">
@@ -65,17 +62,22 @@ export default function Preorder() {
               <ul className="space-y-2 text-sm">
                 <li className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-gradient-to-r from-cyan-300 to-emerald-300 rounded-full"></div>
-                  <span>Priority shipping when available</span>
+                  <span>
+                    It will Revolutionize the Communication than ever before.
+                  </span>
                 </li>
-                <li className="flex items-center space-x-2">
+                {/* <li className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-gradient-to-r from-cyan-300 to-emerald-300 rounded-full"></div>
                   <span>Exclusive {discount}% discount</span>
-                </li>
+                </li> */}
                 <li className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-gradient-to-r from-cyan-300 to-emerald-300 rounded-full"></div>
-                  <span>5% additional discount on orginal price on preorder.</span>
+                  <span>
+                    It will Enhance and Elevate the User Experience with
+                    TeleARGlass and its Application Software Our PanOS & its
+                    Customize Apps
+                  </span>
                 </li>
-               
               </ul>
             </div>
           </div>
@@ -161,14 +163,15 @@ export default function Preorder() {
               <div className="space-y-2">
                 <div className="flex items-center space-x-3">
                   <span className="text-3xl font-bold bg-gradient-to-r from-teal-600 to-emerald-600 bg-clip-text text-transparent">
-                    ${product.discountPrice}
+                    {/* ${product.discountPrice} */}₹46550
                   </span>
                   <span className="text-lg text-gray-400 line-through">
-                    ${product.price}
+                    {/* ${product.price} */}₹49000
                   </span>
                 </div>
                 <p className="text-sm text-emerald-600 font-medium">
-                  You save ${(product.price - product.discountPrice).toFixed(2)}
+                  {/* You save ${(product.price - product.discountPrice).toFixed(2)} */}
+                  You save ₹49000
                 </p>
               </div>
 
