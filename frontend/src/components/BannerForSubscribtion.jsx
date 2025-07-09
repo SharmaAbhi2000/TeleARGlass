@@ -102,7 +102,7 @@ export default function BannerForSubscribtion() {
                     <span className="text-purple-400 font-semibold">
                       TeleARGlass
                     </span>{" "}
-                    works with cutting-edge technology using our proprietary
+                    works with technology using our 
                     <span className="text-purple-400 font-semibold">
                       {" "}
                       PanOS Operating System
@@ -172,7 +172,7 @@ export default function BannerForSubscribtion() {
 
                 <div className="p-6 rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-400/30">
                   <div className="text-blue-400 font-bold text-lg mb-2">
-                    Aesthetic Design
+                    Aesthetic Design and Ergonomics
                   </div>
                   {/* <div className="text-gray-300 text-sm">
                     Beautiful aesthetics & ergonomic design
@@ -181,7 +181,7 @@ export default function BannerForSubscribtion() {
 
                 <div className="p-6 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-400/30">
                   <div className="text-purple-400 font-bold text-lg mb-2">
-                    AI Interpretation
+                    Data Interpretation Techniques
                   </div>
                   {/* <div className="text-gray-300 text-sm">
                     Advanced AI data interpretation techniques
@@ -190,7 +190,7 @@ export default function BannerForSubscribtion() {
 
                 <div className="p-6 rounded-xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 border border-indigo-400/30">
                   <div className="text-indigo-400 font-bold text-lg mb-2">
-                    Sensor Design
+                    Data capturing Sensor Design
                   </div>
                   {/* <div className="text-gray-300 text-sm">
                     Sophisticated data capturing sensor design

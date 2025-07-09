@@ -19,7 +19,7 @@ const Home = () => {
       {/* <BestSeller /> */}
       <Preorder />
       <Newsletter />
-      <OurPolicy />
+      {/* <OurPolicy /> */}
     </div>
   );
 }
