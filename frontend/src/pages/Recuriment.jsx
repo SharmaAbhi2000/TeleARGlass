@@ -194,7 +194,7 @@ const Recruitment = () => {
              Expert Recruitment Portal
             </h1>
             <p className="text-teal-100 text-lg">
-              Join our elite team of developers
+              Join Team Of Tele Experts 
             </p>
           </div>
 

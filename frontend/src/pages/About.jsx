@@ -65,9 +65,7 @@ const About = () => {
                 </h3>
               </div>
               <p className="ml-12 text-purple-700 leading-relaxed">
-                Comprehensive solutions for software issues in TeleARGlass. Our
-                expert team provides remote diagnostics and troubleshooting to
-                ensure optimal performance.
+                It is for the solutions regarding software issues in the TeleARGlass.
               </p>
             </div>
 
@@ -82,9 +80,7 @@ const About = () => {
                 </h3>
               </div>
               <p className="ml-12 text-green-700 leading-relaxed">
-                Professional repair services for TeleARGlass devices after
-                warranty expiration. Certified technicians ensure quality
-                repairs and extended device longevity.
+               It is for the repairing of TeleARGlass once warranty expires.
               </p>
             </div>
 
@@ -97,9 +93,7 @@ const About = () => {
                 <h3 className="text-xl font-bold text-red-800">TeleSecurity</h3>
               </div>
               <p className="ml-12 text-red-700 leading-relaxed">
-                Elite cybersecurity specialists dedicated to TeleARGlass
-                protection. Advanced IT security protocols and threat prevention
-                for your augmented reality experience.
+                It is highly expert TeleARGlass Cyber officials, if 
               </p>
             </div>
           </div>
