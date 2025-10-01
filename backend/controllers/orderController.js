@@ -231,4 +231,69 @@ const updateStatus = async (req,res) => {
     }
 }
 
-export {verifyRazorpay, verifyStripe ,placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus}
+// Place Pre-booking Order
+const placePrebookingOrder = async (req, res) => {
+    try {
+        const { userId, items, totalAmount, address, firstPaymentAmount, remainingAmount } = req.body;
+
+        const orderData = {
+            userId,
+            items,
+            address,
+            amount: totalAmount,
+            paymentMethod: "Pre-booking",
+            payment: false,
+            date: Date.now(),
+            prebooking: {
+                isPrebooking: true,
+                firstPaymentAmount: firstPaymentAmount,
+                remainingAmount: remainingAmount,
+                firstPaymentStatus: 'pending',
+                remainingPaymentStatus: 'pending',
+            }
+        }
+
+        const newOrder = new orderModel(orderData);
+        await newOrder.save();
+
+        await userModel.findByIdAndUpdate(userId, { cartData: {} });
+
+        res.json({ 
+            success: true, 
+            message: "Pre-booking order placed", 
+            orderId: newOrder._id,
+            firstPaymentAmount: firstPaymentAmount,
+            remainingAmount: remainingAmount
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+// Update Pre-booking Payment Status
+const updatePrebookingPayment = async (req, res) => {
+    try {
+        const { orderId, paymentType, status } = req.body; // paymentType: 'first' or 'remaining'
+
+        const updateData = {};
+        if (paymentType === 'first') {
+            updateData['prebooking.firstPaymentStatus'] = status;
+            updateData['prebooking.firstPaymentDate'] = Date.now();
+        } else if (paymentType === 'remaining') {
+            updateData['prebooking.remainingPaymentStatus'] = status;
+            updateData['prebooking.remainingPaymentDate'] = Date.now();
+        }
+
+        await orderModel.findByIdAndUpdate(orderId, updateData);
+
+        res.json({ success: true, message: `${paymentType} payment status updated` });
+
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+export {verifyRazorpay, verifyStripe ,placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus, placePrebookingOrder, updatePrebookingPayment}

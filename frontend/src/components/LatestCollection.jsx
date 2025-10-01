@@ -13,13 +13,13 @@ const LatestCollection = () => {
     },[products])
 
   return (
-    <div className="my-10 px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] ">
-      <div className="text-center py-8 text-3xl">
+    <div className="py-12 px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
+      <div className="text-center mb-8">
         <Title text1={"Featured "} text2={"TeleProducts"} />
-        {/* <p className="w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600">
+        <p className="w-3/4 m-auto text-sm text-gray-600 mt-3">
           Discover our selection of premium TeleARGlass products, carefully
           curated for quality and performance
-        </p> */}
+        </p>
       </div>
 
       {/* Rendering Products */}

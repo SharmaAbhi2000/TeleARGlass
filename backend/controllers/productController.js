@@ -16,6 +16,8 @@ const addProduct = async (req, res) => {
           bestseller,
           discountPrice,
           subscribtion,
+          prebookingEnabled,
+          firstPaymentPercentage,
         } = req.body;
         const image1 = req.files.image1 && req.files.image1[0]
         const image2 = req.files.image2 && req.files.image2[0]
@@ -31,6 +33,12 @@ const addProduct = async (req, res) => {
             })
         )
 
+        // Calculate pre-booking amounts
+        const isPrebookingEnabled = prebookingEnabled === "true" ? true : false;
+        const percentage = firstPaymentPercentage ? Number(firstPaymentPercentage) : 29;
+        const firstPaymentAmount = isPrebookingEnabled ? Math.round(Number(price) * (percentage / 100)) : 0;
+        const remainingAmount = isPrebookingEnabled ? Number(price) - firstPaymentAmount : 0;
+
         const productData = {
           name,
           description,
@@ -40,6 +48,14 @@ const addProduct = async (req, res) => {
           features,
           bestseller: bestseller === "true" ? true : false,
           subscribtion: subscribtion === "true" ? true : false,
+          
+          // Pre-booking data
+          prebooking: {
+            enabled: isPrebookingEnabled,
+            firstPaymentPercentage: percentage,
+            firstPaymentAmount: firstPaymentAmount,
+            remainingAmount: remainingAmount,
+          },
 
           date: Date.now(),
           discountPrice: Number(discountPrice),

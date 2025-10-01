@@ -89,7 +89,7 @@ export default function Subscribtion() {
               <button
                 onClick={() => handleSubscribe(plan)}
                 onMouseEnter={() => setSelectedPlan(plan.id)}
-                className="w-full py-4 px-6 bg-emerald-600 hover:bg-emerald-700 rounded-xl font-semibold text-white transition-all duration-300"
+                className="w-full py-4 px-6 bg-emerald-600 hover:bg-emerald-700 rounded-xl font-semibold text-white transition-all duration-300 shining-button shining-emerald"
               >
                 Subscribe
               </button>

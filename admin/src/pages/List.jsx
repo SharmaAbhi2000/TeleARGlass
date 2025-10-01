@@ -53,7 +53,7 @@ const List = ({ token }) => {
 
         {/* ------- List Table Title ---------- */}
 
-        <div className='hidden md:grid grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center py-1 px-2 border bg-gray-100 text-sm'>
+        <div className='hidden md:grid grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center py-1 px-2 border bg-gray-100 text-sm shadow-sm rounded-t-lg'>
           <b>Image</b>
           <b>Name</b>
           <b>Category</b>
@@ -65,12 +65,12 @@ const List = ({ token }) => {
 
         {
           list.map((item, index) => (
-            <div className='grid grid-cols-[1fr_3fr_1fr] md:grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center gap-2 py-1 px-2 border text-sm' key={index}>
-              <img className='w-12' src={item.image[0]} alt="" />
-              <p>{item.name}</p>
-              <p>{item.category}</p>
-              <p>{currency}{item.price}</p>
-              <p onClick={()=>removeProduct(item._id)} className='text-right md:text-center cursor-pointer text-lg'>X</p>
+            <div className='grid grid-cols-[1fr_3fr_1fr] md:grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center gap-2 py-1 px-2 border text-sm bg-white hover:bg-gray-50 transition-all duration-200 shadow-sm hover:shadow-md' key={index}>
+              <img className='w-12 shadow-sm hover:shadow-md transition-all duration-200 hover:scale-110 rounded' src={item.image[0]} alt="" />
+              <p className='hover:text-gray-900 transition-colors duration-200'>{item.name}</p>
+              <p className='hover:text-gray-900 transition-colors duration-200'>{item.category}</p>
+              <p className='hover:text-teal-600 transition-colors duration-200 font-semibold'>{currency}{item.price}</p>
+              <p onClick={()=>removeProduct(item._id)} className='text-right md:text-center cursor-pointer text-lg hover:text-red-600 hover:bg-red-50 rounded-full w-6 h-6 flex items-center justify-center transition-all duration-200 hover:scale-110'>X</p>
             </div>
           ))
         }

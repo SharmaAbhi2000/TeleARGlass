@@ -9,6 +9,14 @@ const productSchema = new mongoose.Schema({
   features: { type: Array, required: false },
   bestseller: { type: Boolean },
   subscribtion: { type: Boolean },
+  
+  // Pre-booking payment structure
+  prebooking: {
+    enabled: { type: Boolean, default: false },
+    firstPaymentPercentage: { type: Number, default: 29 }, // 29% for first payment
+    firstPaymentAmount: { type: Number }, // Calculated: price * (firstPaymentPercentage / 100)
+    remainingAmount: { type: Number }, // Calculated: price - firstPaymentAmount
+  },
 
   date: { type: Number, required: true },
   discountPrice: { type: Number, required: true },

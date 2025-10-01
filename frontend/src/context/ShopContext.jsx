@@ -26,6 +26,7 @@ const ShopContextProvider = (props) => {
         }
 
         let cartData = structuredClone(cartItems);
+        let isNewItem = false;
 
         if (cartData[itemId]) {
             if (cartData[itemId][size]) {
@@ -33,19 +34,48 @@ const ShopContextProvider = (props) => {
             }
             else {
                 cartData[itemId][size] = 1;
+                isNewItem = true;
             }
         }
         else {
             cartData[itemId] = {};
             cartData[itemId][size] = 1;
+            isNewItem = true;
         }
         setCartItems(cartData);
 
+        // Save to localStorage for persistence
+        localStorage.setItem('cartData', JSON.stringify(cartData));
+
+        // Show success toast notification
+        if (isNewItem) {
+            toast.success('Item added to cart!', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        } else {
+            toast.success('Quantity updated in cart!', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+
+        // Save to database if user is logged in
         if (token) {
             try {
-
                 await axios.post(backendUrl + '/api/cart/add', { itemId, size }, { headers: { token } })
-
             } catch (error) {
                 console.log(error)
                 toast.error(error.message)
@@ -78,11 +108,12 @@ const ShopContextProvider = (props) => {
 
         setCartItems(cartData)
 
+        // Save to localStorage for persistence
+        localStorage.setItem('cartData', JSON.stringify(cartData));
+
         if (token) {
             try {
-
                 await axios.post(backendUrl + '/api/cart/update', { itemId, size, quantity }, { headers: { token } })
-
             } catch (error) {
                 console.log(error)
                 toast.error(error.message)
@@ -130,6 +161,8 @@ const ShopContextProvider = (props) => {
             const response = await axios.post(backendUrl + '/api/cart/get',{},{headers:{token}})
             if (response.data.success) {
                 setCartItems(response.data.cartData)
+                // Save to localStorage for consistency
+                localStorage.setItem('cartData', JSON.stringify(response.data.cartData))
             }
         } catch (error) {
             console.log(error)
@@ -137,14 +170,72 @@ const ShopContextProvider = (props) => {
         }
     }
 
+    // Load cart data from localStorage
+    const loadCartFromLocalStorage = () => {
+        try {
+            const savedCartData = localStorage.getItem('cartData');
+            if (savedCartData) {
+                const parsedCartData = JSON.parse(savedCartData);
+                setCartItems(parsedCartData);
+                return parsedCartData;
+            }
+        } catch (error) {
+            console.log('Error loading cart from localStorage:', error);
+        }
+        return {};
+    }
+
+    // Synchronize localStorage cart with database when user logs in
+    const syncCartWithDatabase = async (token) => {
+        try {
+            const localCartData = localStorage.getItem('cartData');
+            if (localCartData) {
+                const parsedCartData = JSON.parse(localCartData);
+                
+                // Send each item to database
+                for (const itemId in parsedCartData) {
+                    for (const size in parsedCartData[itemId]) {
+                        const quantity = parsedCartData[itemId][size];
+                        if (quantity > 0) {
+                            // Add each item to database cart
+                            for (let i = 0; i < quantity; i++) {
+                                await axios.post(backendUrl + '/api/cart/add', { itemId, size }, { headers: { token } });
+                            }
+                        }
+                    }
+                }
+                
+                // Clear localStorage after sync
+                localStorage.removeItem('cartData');
+                
+                // Get updated cart from database
+                await getUserCart(token);
+            }
+        } catch (error) {
+            console.log('Error syncing cart with database:', error);
+        }
+    }
+
+    // Clear cart data (used when order is placed)
+    const clearCart = () => {
+        setCartItems({});
+        localStorage.removeItem('cartData');
+    }
+
     useEffect(() => {
         getProductsData()
+        
+        // Load cart from localStorage on app start
+        loadCartFromLocalStorage()
     }, [])
 
     useEffect(() => {
         if (!token && localStorage.getItem('token')) {
-            setToken(localStorage.getItem('token'))
-            getUserCart(localStorage.getItem('token'))
+            const savedToken = localStorage.getItem('token')
+            setToken(savedToken)
+            
+            // Sync localStorage cart with database when user logs in
+            syncCartWithDatabase(savedToken)
         }
         if (token) {
             getUserCart(token)
@@ -154,10 +245,10 @@ const ShopContextProvider = (props) => {
     const value = {
         products, currency, delivery_fee,
         search, setSearch, showSearch, setShowSearch,
-        cartItems, addToCart,setCartItems,
+        cartItems, addToCart, setCartItems,
         getCartCount, updateQuantity,
         getCartAmount, navigate, backendUrl,
-        setToken, token
+        setToken, token, loadCartFromLocalStorage, syncCartWithDatabase, clearCart
     }
 
     return (

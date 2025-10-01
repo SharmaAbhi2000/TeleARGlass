@@ -27,50 +27,32 @@ export default function BannerForSubscribtion() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-teal-50 via-cyan-50 to-violet-50 overflow-hidden">
-      {/* Animated Background Pattern */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-emerald-400 to-teal-600 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-20 right-0 w-80 h-80 bg-gradient-to-br from-blue-400 to-cyan-600 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute bottom-0 left-1/3 w-72 h-72 bg-gradient-to-br from-purple-400 to-pink-600 rounded-full blur-3xl animate-pulse delay-2000"></div>
-      </div>
-
-      {/* Peacock Feather Pattern */}
+    <div className="relative bg-gradient-to-b from-teal-50 via-cyan-50 to-violet-50 overflow-hidden">
+      {/* Subtle Background Pattern */}
       <div className="absolute inset-0 opacity-10">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-4 h-4 bg-gradient-to-r from-emerald-400 to-blue-500 rounded-full animate-ping"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 2}s`,
-            }}
-          ></div>
-        ))}
+        <div className="absolute top-0 left-0 w-64 h-64 bg-gradient-to-br from-emerald-400 to-teal-600 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 right-0 w-48 h-48 bg-gradient-to-br from-blue-400 to-cyan-600 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-1/3 w-56 h-56 bg-gradient-to-br from-purple-400 to-pink-600 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-12">
+      <div className="relative z-10 container mx-auto px-4 py-16">
         {/* Header Section */}
         <div
-          className={`text-center mb-16 transform transition-all duration-1000 ${
+          className={`text-center mb-12 transform transition-all duration-1000 ${
             isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
-          <div className="flex justify-center items-center mb-6">
-            <div className="relative  ">
-              <img src={"logo.jpeg"} className="w-64 h-32 rounded-xl " />
-              {/* <Glasses className="w-16 h-16 text-emerald-400 animate-bounce" /> */}
-              <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full animate-ping"></div>
+          <div className="flex justify-center items-center mb-4">
+            <div className="relative">
+              <img src={"logo.jpeg"} className="w-48 h-24 rounded-xl" />
             </div>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold text-purple-600 bg-clip-text mb-4 ">
+          <h1 className="text-3xl md:text-4xl font-bold text-purple-600 mb-3">
             TeleARGlass
           </h1>
 
-          <div className="text-2xl md:text-3xl font-semibold text-orange-500  mb-8">
+          <div className="text-lg md:text-xl font-semibold text-orange-500 mb-6">
             Patent Licensing
           </div>
         </div>
@@ -81,10 +63,10 @@ export default function BannerForSubscribtion() {
             isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
-          <div className="backdrop-blur-xl bg-gradient-to-br from-teal-600/80 via-blue-700/80 to-emerald-600/80 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
+          <div className="backdrop-blur-xl bg-gradient-to-br from-teal-600/80 via-blue-700/80 to-emerald-600/80 rounded-2xl p-6 md:p-8 border border-white/20 shadow-xl">
             {/* Innovation Header */}
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
                 Our Innovative, Sustainable
                 <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">
                   {" "}
@@ -95,20 +77,20 @@ export default function BannerForSubscribtion() {
             </div>
 
             {/* Technology Description */}
-            <div className="grid md:grid-cols-2 gap-12 items-center mb-12">
+            <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
               <div>
-                <div className="space-y-4 text-lg text-gray-200">
+                <div className="space-y-3 text-base text-white">
                   <p>
-                    <span className="text-purple-400 font-semibold">
+                    <span className="text-purple-600 font-semibold">
                       TeleARGlass
                     </span>{" "}
                     works with technology using our 
-                    <span className="text-purple-400 font-semibold">
+                    <span className="text-purple-600 font-semibold">
                       {" "}
                       PanOS Operating System
                     </span>{" "}
                     and its customizable range of
-                    <span className="text-purple-400 font-semibold">
+                    <span className="text-purple-600 font-semibold">
                       {" "}
                       30+ Product Software Apps
                     </span>
@@ -116,11 +98,11 @@ export default function BannerForSubscribtion() {
                   </p>
                   <p>
                     Experience{" "}
-                    <span className="text-purple-400 font-semibold">
+                    <span className="text-purple-600 font-semibold">
                       Immersive Augmented Reality (AR) Display
                     </span>
                     , advanced{" "}
-                    <span className="text-purple-400 font-semibold">
+                    <span className="text-purple-600 font-semibold">
                       Speaking Accessibility
                     </span>{" "}
                     features, and much more.
@@ -129,16 +111,14 @@ export default function BannerForSubscribtion() {
               </div>
 
               {/* Feature Icons */}
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 gap-4">
                 {features.map((feature, index) => (
                   <div
                     key={index}
-                    className={`flex flex-col items-center p-4 rounded-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/20 transform transition-all duration-500 hover:scale-105 hover:shadow-lg delay-${
-                      index * 100
-                    }`}
+                    className={`flex flex-col items-center p-3 rounded-lg bg-gradient-to-br from-white/10 to-white/5 border border-white/20 transform transition-all duration-300 hover:scale-105 hover:shadow-md`}
                   >
-                    <feature.icon className="w-8 h-8 text-emerald-400 mb-2" />
-                    <span className="text-sm text-gray-300 text-center">
+                    <feature.icon className="w-6 h-6 text-emerald-400 mb-2" />
+                    <span className="text-xs text-white text-center">
                       {feature.text}
                     </span>
                   </div>
@@ -148,72 +128,54 @@ export default function BannerForSubscribtion() {
 
             {/* Complete Solution */}
             <div className="text-center">
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">
+              <h3 className="text-xl md:text-2xl font-bold text-white mb-4">
                 Complete Solution Package
               </h3>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-                <div className="p-6 rounded-xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-400/30">
-                  <div className="text-emerald-400 font-bold text-lg mb-2">
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+                <div className="p-4 rounded-lg bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-400/30">
+                  <div className="text-emerald-400 font-bold text-base mb-2">
                     Customizable Software
                   </div>
-                  <div className="text-gray-300 text-sm">
-                    <ul className="text-left list-disc " >
+                  <div className="text-white text-xs">
+                    <ul className="text-left list-disc space-y-1">
                       <li>ISRO Space Communication</li>
-                      <li>Defence Research & Development Organisation(DRDO)</li>
-                      <li>TeleARGlass Legacy Inbuilt Mobile</li>
-                      <li>Accessibility</li>
-                      <li>Social Media</li>
-                      <li>Gaming </li>
+                      <li>DRDO Applications</li>
+                      <li>Legacy Mobile Features</li>
+                      <li>Accessibility Tools</li>
+                      <li>Social Media Integration</li>
+                      <li>Gaming & Entertainment</li>
                       <li>Home Automation</li>
-                      <li>Robotics</li>
+                      <li>Robotics Control</li>
                     </ul>
                   </div>
                 </div>
 
-                <div className="p-6 rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-400/30">
-                  <div className="text-blue-400 font-bold text-lg mb-2">
+                <div className="p-4 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-400/30">
+                  <div className="text-blue-400 font-bold text-base mb-2">
                     Aesthetic Design and Ergonomics
                   </div>
-                  {/* <div className="text-gray-300 text-sm">
-                    Beautiful aesthetics & ergonomic design
-                  </div> */}
                 </div>
 
-                <div className="p-6 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-400/30">
-                  <div className="text-purple-400 font-bold text-lg mb-2">
+                <div className="p-4 rounded-lg bg-gradient-to-br from-pink-600/20 to-pink-700/20 border border-pink-500/30">
+                  <div className="text-pink-600 font-bold text-base mb-2">
                     Data Interpretation Techniques
                   </div>
-                  {/* <div className="text-gray-300 text-sm">
-                    Advanced AI data interpretation techniques
-                  </div> */}
                 </div>
 
-                <div className="p-6 rounded-xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 border border-indigo-400/30">
-                  <div className="text-indigo-400 font-bold text-lg mb-2">
+                <div className="p-4 rounded-lg bg-gradient-to-br from-indigo-600/20 to-violet-600/20 border border-indigo-500/30">
+                  <div className="text-indigo-600 font-bold text-base mb-2">
                     Data capturing Sensor Design
                   </div>
-                  {/* <div className="text-gray-300 text-sm">
-                    Sophisticated data capturing sensor design
-                  </div> */}
                 </div>
               </div>
             </div>
 
             {/* Call to Action */}
-            <div className="text-center mt-12">
-              {/* <button className="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-bold text-lg rounded-full transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-                Explore Licensing Opportunities
-              </button> */}
-
+            <div className="text-center mt-8">
               <Subscribtion />
             </div>
           </div>
         </div>
-
-        {/* Floating Elements */}
-        <div className="fixed top-1/4 left-4 w-2 h-2 bg-emerald-400 rounded-full animate-ping"></div>
-        <div className="fixed top-1/3 right-8 w-3 h-3 bg-blue-400 rounded-full animate-ping delay-1000"></div>
-        <div className="fixed bottom-1/4 left-1/3 w-2 h-2 bg-purple-400 rounded-full animate-ping delay-2000"></div>
       </div>
     </div>
   );

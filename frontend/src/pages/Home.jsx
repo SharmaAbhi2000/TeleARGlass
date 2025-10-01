@@ -11,7 +11,7 @@ import BannerForSubscribtion from '../components/BannerForSubscribtion'
 
 const Home = () => {
   return (
-    <div className="">
+    <div className="space-y-0">
       <Hero />
       <BannerForSubscribtion />
       <LatestCollection />

@@ -26,3 +26,81 @@ a.active hr{
         color: white;
     }
   }
+
+  /* Shining effect keyframes */
+  @keyframes shine {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  /* Shining effect for buttons */
+  .shining-button {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shining-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: shine 2s infinite;
+    pointer-events: none;
+  }
+
+  /* Teal variant shining effect */
+  .shining-teal::before {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    background-size: 200% 100%;
+  }
+
+  /* Emerald variant shining effect */
+  .shining-emerald::before {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    background-size: 200% 100%;
+  }
+
+  /* Black variant shining effect */
+  .shining-black::before {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    background-size: 200% 100%;
+  }
+
+  /* Gray variant shining effect */
+  .shining-gray::before {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    background-size: 200% 100%;
+  }

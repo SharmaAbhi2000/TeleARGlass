@@ -11,22 +11,22 @@ const Button = ({
   ...props
 }) => {
   const baseStyles =
-    "inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2";
+    "inline-flex items-center justify-center font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 shining-button";
 
   const variantStyles = {
-    primary: "bg-blue-600 hover:bg-blue-700 text-white focus:ring-blue-500",
+    primary: "bg-teal-600 hover:bg-teal-700 text-white focus:ring-teal-500 shadow-sm hover:shadow-md shining-teal",
     secondary:
-      "bg-gray-200 hover:bg-gray-300 text-gray-900 focus:ring-gray-400",
+      "bg-gray-100 hover:bg-gray-200 text-gray-900 focus:ring-gray-400 border border-gray-200 shining-gray",
     outline:
-      "border border-gray-300 hover:bg-gray-100 text-gray-800 focus:ring-gray-400",
-    ghost: "hover:bg-gray-100 text-gray-800 focus:ring-gray-400",
-    link: "text-blue-600 hover:text-blue-800 underline focus:ring-blue-500",
+      "border border-gray-300 hover:bg-gray-50 text-gray-800 focus:ring-gray-400 bg-white shining-gray",
+    ghost: "hover:bg-gray-100 text-gray-800 focus:ring-gray-400 shining-gray",
+    link: "text-teal-600 hover:text-teal-800 underline focus:ring-teal-500",
   };
 
   const sizeStyles = {
     sm: "text-sm px-3 py-1.5",
-    md: "text-base px-4 py-2",
-    lg: "text-lg px-6 py-3",
+    md: "text-sm px-4 py-2",
+    lg: "text-base px-6 py-3",
   };
 
   const widthStyles = fullWidth ? "w-full" : "";

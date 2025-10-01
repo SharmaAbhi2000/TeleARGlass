@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import {assets} from '../assets/assets'
 import { Link, NavLink } from 'react-router-dom'
 import { ShopContext } from '../context/ShopContext';
@@ -6,8 +6,17 @@ import { ShopContext } from '../context/ShopContext';
 const Navbar = () => {
 
     const [visible,setVisible] = useState(false);
+    const [cartAnimation, setCartAnimation] = useState(false);
 
-    const {setShowSearch , getCartCount , navigate, token, setToken, setCartItems} = useContext(ShopContext);
+    const {setShowSearch , getCartCount , navigate, token, setToken, setCartItems, cartItems} = useContext(ShopContext);
+
+    // Trigger cart animation when cart items change
+    useEffect(() => {
+        if (getCartCount() > 0) {
+            setCartAnimation(true);
+            setTimeout(() => setCartAnimation(false), 1000);
+        }
+    }, [cartItems]);
 
     const logout = () => {
         navigate('/login')
@@ -22,15 +31,19 @@ const Navbar = () => {
         {" "}
         <span className="flex flex-row justify-center items-center space-x-5 ">
           <img src={assets.logo} className="w-36 rounded-lg " alt="" />
-          <p className=" text-xl font-bold ">TeleARGlass</p>{" "}
+          <div className="inline-flex gap-1 items-center">
+            <p className="text-xl text-gray-400 font-light">
+             <span className="text-gray-800 font-bold">TeleARGlass</span>
+            </p>
+          </div>
         </span>{" "}
       </Link>
 
       <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
-        <NavLink to="/" className="flex flex-col items-center gap-1">
-          <p>HOME</p>
-          <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
-        </NavLink>
+         <NavLink to="/" className="flex flex-col items-center gap-1">
+           <p>Home</p>
+           <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
+         </NavLink>
         <NavLink
           to="/teleProducts"
           className="flex flex-col items-center gap-1"
@@ -92,8 +105,16 @@ const Navbar = () => {
           )}
         </div>
         <Link to="/cart" className="relative">
-          <img src={assets.cart_icon} className="w-5 min-w-5" alt="" />
-          <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
+          <img 
+            src={assets.cart_icon} 
+            className={`w-5 min-w-5 transition-all duration-300 ${
+              cartAnimation ? 'animate-bounce scale-110' : ''
+            }`} 
+            alt="" 
+          />
+          <p className={`absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px] transition-all duration-300 ${
+            cartAnimation ? 'scale-125 bg-green-600 animate-pulse' : ''
+          }`}>
             {getCartCount()}
           </p>
         </Link>

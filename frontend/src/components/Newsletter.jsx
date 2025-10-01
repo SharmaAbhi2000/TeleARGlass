@@ -12,13 +12,13 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="py-16 bg-gradient-to-b from-teal-50 via-cyan-50 to-violet-50 text-gray-900">
+    <section className="py-12 bg-gradient-to-b from-teal-50 via-cyan-50 to-violet-50 text-gray-900">
       <Container>
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="mb-8">
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="mb-6">
             <span className="inline-block p-2 bg-teal-100 rounded-full mb-2">
               <svg
-                className="w-6 h-6 text-teal-600"
+                className="w-5 h-5 text-teal-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -32,10 +32,10 @@ const Newsletter = () => {
               </svg>
             </span>
           </div>
-          <h2 className="text-3xl font-bold text-teal-700 mb-4">
+          <h2 className="text-2xl font-bold text-teal-700 mb-3">
             Stay Updated with our new Tele products
           </h2>
-          <p className="text-cyan-700 mb-8">
+          <p className="text-cyan-700 mb-6 text-sm">
             We thrive by continuous improvement at TeleARGlass by Innovation &
             Sustainability. That We apply in New TeleProducts with performance
             as per current Teleconsumers needs.
@@ -43,8 +43,8 @@ const Newsletter = () => {
 
           {submitted ? (
             <div className="bg-emerald-100 text-emerald-800 p-4 rounded-lg">
-              <p className="font-medium">Thank you for subscribing!</p>
-              <p className="text-sm mt-1">
+              <p className="font-medium text-sm">Thank you for subscribing!</p>
+              <p className="text-xs mt-1">
                 We've sent a confirmation email to {email}.
               </p>
             </div>
@@ -57,12 +57,12 @@ const Newsletter = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
                   required
-                  className="flex-grow px-4 py-3 rounded-lg border border-teal-300 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent"
+                  className="flex-grow px-4 py-2.5 rounded-lg border border-teal-300 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent text-sm"
                 />
                 <Button
                   type="submit"
                   variant="primary"
-                  className="bg-teal-600 hover:bg-teal-700 px-6 py-3 sm:whitespace-nowrap"
+                  className="bg-teal-600 hover:bg-teal-700 px-6 py-2.5 sm:whitespace-nowrap rounded-lg shining-teal"
                 >
                   Subscribe
                 </Button>

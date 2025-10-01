@@ -5,6 +5,7 @@ import { assets } from '../assets/assets'
 import { ShopContext } from '../context/ShopContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { User, MapPin, CreditCard, Truck, Shield, CheckCircle } from 'lucide-react'
 
 const PlaceOrder = () => {
 
@@ -127,61 +128,269 @@ const PlaceOrder = () => {
 
 
     return (
-        <form onSubmit={onSubmitHandler} className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t'>
-            {/* ------------- Left Side ---------------- */}
-            <div className='flex flex-col gap-4 w-full sm:max-w-[480px]'>
-
-                <div className='text-xl sm:text-2xl my-3'>
-                    <Title text1={'DELIVERY'} text2={'INFORMATION'} />
-                </div>
-                <div className='flex gap-3'>
-                    <input required onChange={onChangeHandler} name='firstName' value={formData.firstName} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type="text" placeholder='First name' />
-                    <input required onChange={onChangeHandler} name='lastName' value={formData.lastName} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type="text" placeholder='Last name' />
-                </div>
-                <input required onChange={onChangeHandler} name='email' value={formData.email} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type="email" placeholder='Email address' />
-                <input required onChange={onChangeHandler} name='street' value={formData.street} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type="text" placeholder='Street' />
-                <div className='flex gap-3'>
-                    <input required onChange={onChangeHandler} name='city' value={formData.city} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type="text" placeholder='City' />
-                    <input onChange={onChangeHandler} name='state' value={formData.state} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type="text" placeholder='State' />
-                </div>
-                <div className='flex gap-3'>
-                    <input required onChange={onChangeHandler} name='zipcode' value={formData.zipcode} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type="number" placeholder='Zipcode' />
-                    <input required onChange={onChangeHandler} name='country' value={formData.country} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type="text" placeholder='Country' />
-                </div>
-                <input required onChange={onChangeHandler} name='phone' value={formData.phone} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type="number" placeholder='Phone' />
-            </div>
-
-            {/* ------------- Right Side ------------------ */}
-            <div className='mt-8'>
-
-                <div className='mt-8 min-w-80'>
-                    <CartTotal />
+        <div className="min-h-screen bg-gray-50 py-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Header */}
+                <div className="mb-8">
+                    <Title text1={'COMPLETE YOUR'} text2={'ORDER'} />
+                    <p className="text-gray-600 mt-2">Review your information and place your order securely</p>
                 </div>
 
-                <div className='mt-12'>
-                    <Title text1={'PAYMENT'} text2={'METHOD'} />
-                    {/* --------------- Payment Method Selection ------------- */}
-                    <div className='flex gap-3 flex-col lg:flex-row'>
-                        <div onClick={() => setMethod('stripe')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
-                            <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'stripe' ? 'bg-green-400' : ''}`}></p>
-                            <img className='h-5 mx-4' src={assets.stripe_logo} alt="" />
+                <form onSubmit={onSubmitHandler} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    {/* Left Column - Delivery Information */}
+                    <div className="lg:col-span-2 space-y-8">
+                        {/* Delivery Information Card */}
+                        <div className="bg-white rounded-2xl shadow-lg p-6 lg:p-8">
+                            <div className="flex items-center mb-6">
+                                <div className="p-2 bg-teal-100 rounded-lg mr-3">
+                                    <MapPin className="w-6 h-6 text-teal-600" />
+                                </div>
+                                <h2 className="text-2xl font-bold text-gray-900">Delivery Information</h2>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {/* First Name */}
+                                <div className="space-y-2">
+                                    <label className="block text-sm font-medium text-gray-700">First Name *</label>
+                                    <input 
+                                        required 
+                                        onChange={onChangeHandler} 
+                                        name='firstName' 
+                                        value={formData.firstName} 
+                                        className='w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors' 
+                                        type="text" 
+                                        placeholder='Enter your first name' 
+                                    />
+                                </div>
+
+                                {/* Last Name */}
+                                <div className="space-y-2">
+                                    <label className="block text-sm font-medium text-gray-700">Last Name *</label>
+                                    <input 
+                                        required 
+                                        onChange={onChangeHandler} 
+                                        name='lastName' 
+                                        value={formData.lastName} 
+                                        className='w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors' 
+                                        type="text" 
+                                        placeholder='Enter your last name' 
+                                    />
+                                </div>
+
+                                {/* Email */}
+                                <div className="space-y-2 md:col-span-2">
+                                    <label className="block text-sm font-medium text-gray-700">Email Address *</label>
+                                    <input 
+                                        required 
+                                        onChange={onChangeHandler} 
+                                        name='email' 
+                                        value={formData.email} 
+                                        className='w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors' 
+                                        type="email" 
+                                        placeholder='Enter your email address' 
+                                    />
+                                </div>
+
+                                {/* Street Address */}
+                                <div className="space-y-2 md:col-span-2">
+                                    <label className="block text-sm font-medium text-gray-700">Street Address *</label>
+                                    <input 
+                                        required 
+                                        onChange={onChangeHandler} 
+                                        name='street' 
+                                        value={formData.street} 
+                                        className='w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors' 
+                                        type="text" 
+                                        placeholder='Enter your street address' 
+                                    />
+                                </div>
+
+                                {/* City */}
+                                <div className="space-y-2">
+                                    <label className="block text-sm font-medium text-gray-700">City *</label>
+                                    <input 
+                                        required 
+                                        onChange={onChangeHandler} 
+                                        name='city' 
+                                        value={formData.city} 
+                                        className='w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors' 
+                                        type="text" 
+                                        placeholder='Enter your city' 
+                                    />
+                                </div>
+
+                                {/* State */}
+                                <div className="space-y-2">
+                                    <label className="block text-sm font-medium text-gray-700">State</label>
+                                    <input 
+                                        onChange={onChangeHandler} 
+                                        name='state' 
+                                        value={formData.state} 
+                                        className='w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors' 
+                                        type="text" 
+                                        placeholder='Enter your state' 
+                                    />
+                                </div>
+
+                                {/* Zipcode */}
+                                <div className="space-y-2">
+                                    <label className="block text-sm font-medium text-gray-700">Zipcode *</label>
+                                    <input 
+                                        required 
+                                        onChange={onChangeHandler} 
+                                        name='zipcode' 
+                                        value={formData.zipcode} 
+                                        className='w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors' 
+                                        type="number" 
+                                        placeholder='Enter zipcode' 
+                                    />
+                                </div>
+
+                                {/* Country */}
+                                <div className="space-y-2">
+                                    <label className="block text-sm font-medium text-gray-700">Country *</label>
+                                    <input 
+                                        required 
+                                        onChange={onChangeHandler} 
+                                        name='country' 
+                                        value={formData.country} 
+                                        className='w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors' 
+                                        type="text" 
+                                        placeholder='Enter your country' 
+                                    />
+                                </div>
+
+                                {/* Phone */}
+                                <div className="space-y-2 md:col-span-2">
+                                    <label className="block text-sm font-medium text-gray-700">Phone Number *</label>
+                                    <input 
+                                        required 
+                                        onChange={onChangeHandler} 
+                                        name='phone' 
+                                        value={formData.phone} 
+                                        className='w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors' 
+                                        type="tel" 
+                                        placeholder='Enter your phone number' 
+                                    />
+                                </div>
+                            </div>
                         </div>
-                        <div onClick={() => setMethod('razorpay')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
-                            <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'razorpay' ? 'bg-green-400' : ''}`}></p>
-                            <img className='h-5 mx-4' src={assets.razorpay_logo} alt="" />
-                        </div>
-                        <div onClick={() => setMethod('cod')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
-                            <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'cod' ? 'bg-green-400' : ''}`}></p>
-                            <p className='text-gray-500 text-sm font-medium mx-4'>CASH ON DELIVERY</p>
+
+                        {/* Payment Method Card */}
+                        <div className="bg-white rounded-2xl shadow-lg p-6 lg:p-8">
+                            <div className="flex items-center mb-6">
+                                <div className="p-2 bg-blue-100 rounded-lg mr-3">
+                                    <CreditCard className="w-6 h-6 text-blue-600" />
+                                </div>
+                                <h2 className="text-2xl font-bold text-gray-900">Payment Method</h2>
+                            </div>
+
+                            <div className="space-y-4">
+                                {/* Stripe Payment */}
+                                <div 
+                                    onClick={() => setMethod('stripe')} 
+                                    className={`flex items-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 ${
+                                        method === 'stripe' 
+                                            ? 'border-teal-500 bg-teal-50' 
+                                            : 'border-gray-200 hover:border-gray-300'
+                                    }`}
+                                >
+                                    <div className={`w-5 h-5 rounded-full border-2 mr-4 flex items-center justify-center ${
+                                        method === 'stripe' 
+                                            ? 'border-teal-500 bg-teal-500' 
+                                            : 'border-gray-300'
+                                    }`}>
+                                        {method === 'stripe' && <CheckCircle className="w-3 h-3 text-white" />}
+                                    </div>
+                                    <img className='h-6 mr-4' src={assets.stripe_logo} alt="Stripe" />
+                                    <div>
+                                        <p className="font-medium text-gray-900">Stripe</p>
+                                        <p className="text-sm text-gray-500">Pay with credit/debit card</p>
+                                    </div>
+                                </div>
+
+                                {/* Razorpay Payment */}
+                                <div 
+                                    onClick={() => setMethod('razorpay')} 
+                                    className={`flex items-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 ${
+                                        method === 'razorpay' 
+                                            ? 'border-teal-500 bg-teal-50' 
+                                            : 'border-gray-200 hover:border-gray-300'
+                                    }`}
+                                >
+                                    <div className={`w-5 h-5 rounded-full border-2 mr-4 flex items-center justify-center ${
+                                        method === 'razorpay' 
+                                            ? 'border-teal-500 bg-teal-500' 
+                                            : 'border-gray-300'
+                                    }`}>
+                                        {method === 'razorpay' && <CheckCircle className="w-3 h-3 text-white" />}
+                                    </div>
+                                    <img className='h-6 mr-4' src={assets.razorpay_logo} alt="Razorpay" />
+                                    <div>
+                                        <p className="font-medium text-gray-900">Razorpay</p>
+                                        <p className="text-sm text-gray-500">Secure online payment</p>
+                                    </div>
+                                </div>
+
+                                {/* Cash on Delivery */}
+                                <div 
+                                    onClick={() => setMethod('cod')} 
+                                    className={`flex items-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 ${
+                                        method === 'cod' 
+                                            ? 'border-teal-500 bg-teal-50' 
+                                            : 'border-gray-200 hover:border-gray-300'
+                                    }`}
+                                >
+                                    <div className={`w-5 h-5 rounded-full border-2 mr-4 flex items-center justify-center ${
+                                        method === 'cod' 
+                                            ? 'border-teal-500 bg-teal-500' 
+                                            : 'border-gray-300'
+                                    }`}>
+                                        {method === 'cod' && <CheckCircle className="w-3 h-3 text-white" />}
+                                    </div>
+                                    <div className="p-2 bg-green-100 rounded-lg mr-4">
+                                        <Truck className="w-5 h-5 text-green-600" />
+                                    </div>
+                                    <div>
+                                        <p className="font-medium text-gray-900">Cash on Delivery</p>
+                                        <p className="text-sm text-gray-500">Pay when your order arrives</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div className='w-full text-end mt-8'>
-                        <button type='submit' className='bg-black text-white px-16 py-3 text-sm'>PLACE ORDER</button>
+                    {/* Right Column - Order Summary */}
+                    <div className="lg:col-span-1">
+                        <div className="sticky top-8">
+                            {/* Order Summary Card */}
+                            <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
+                                <h3 className="text-xl font-bold text-gray-900 mb-6">Order Summary</h3>
+                                <CartTotal />
+                            </div>
+
+                            {/* Security Badge */}
+                            <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-6">
+                                <div className="flex items-center">
+                                    <Shield className="w-5 h-5 text-green-600 mr-2" />
+                                    <p className="text-sm font-medium text-green-800">Secure Checkout</p>
+                                </div>
+                                <p className="text-xs text-green-700 mt-1">Your payment information is encrypted and secure</p>
+                            </div>
+
+                            {/* Place Order Button */}
+                            <button 
+                                type='submit' 
+                                className='w-full bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center space-x-3 shining-button shining-emerald'
+                            >
+                                <CheckCircle className="w-6 h-6" />
+                                <span>Place Order</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
-        </form>
+        </div>
     )
 }
 

@@ -3,115 +3,96 @@ import { useNavigate } from "react-router-dom";
 const About = () => {
   const router=useNavigate();
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-600 via-blue-700 to-emerald-600 p-6 font-serif">
-      <div className="max-w-4xl mx-auto">
-        <div className="bg-white shadow-2xl border-2 border-blue-200 p-8 rounded-3xl relative overflow-hidden">
-          {/* Decorative Elements */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-200 to-transparent rounded-full -mr-16 -mt-16 opacity-50"></div>
-          <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-indigo-200 to-transparent rounded-full -ml-12 -mb-12 opacity-50"></div>
+    <div className="min-h-screen bg-gradient-to-b from-teal-50 via-cyan-50 to-violet-50">
+      <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] py-6">
+        {/* Header Section */}
+        <div className="text-center mb-6">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
+            ALL <span className="text-teal-600">SERVICES</span>
+          </h2>
+          <p className="text-sm text-gray-600 mt-2">
+            Comprehensive TeleARGlass services for all your needs
+          </p>
+        </div>
 
-          {/* Title */}
-          <div className="text-center mb-10">
-            <h1 className="text-5xl  font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-2">
-              TeleServices
-            </h1>
-          </div>
-
-          {/* Services Grid */}
-          <div className="grid gap-6 mb-8">
-            {/* Service 1 */}
-            <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-2xl border border-blue-200 hover:shadow-lg transition-all duration-300">
-              <div className="flex items-center mb-4">
-                <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold mr-4">
-                  1
-                </div>
-                <h3 className="text-xl font-bold text-blue-800">
-                  TeleOrientation
-                </h3>
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 gap-4">
+          {/* Service 1 */}
+          <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="flex items-center mb-3">
+              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold mr-2 text-xs">
+                1
               </div>
-              <div className="ml-12">
-                <div className="flex flex-wrap gap-3">
-                  <a
-                    href="https://www.youtube.com/watch?v=AA4sS5zEqeg&list=TLGGcYcGan7ykf4yMzA2MjAyNQ"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block"
-                  >
-                    <span className="bg-blue-200 text-blue-800 px-4 py-2 cursor-pointer rounded-full text-sm font-medium">
-                      TeleWatch
-                    </span>
-                  </a>
-                  <a
-                    href="contact"
-                  
-                    className="block"
-                  >
-                    <span className="bg-blue-200 cursor-pointer text-blue-800 px-4 py-2 rounded-full text-sm font-medium">
-                      TeleBook Live in Store
-                    </span>
-                  </a>
-                </div>
-              </div>
+              <h3 className="text-base font-bold text-gray-800">
+                TeleOrientation
+              </h3>
             </div>
-
-            {/* Service 2 */}
-            <div className="bg-gradient-to-r from-purple-50 to-purple-100 p-6 rounded-2xl border border-purple-200 hover:shadow-lg transition-all duration-300">
-              <div className="flex items-center mb-4">
-                <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold mr-4">
-                  2
-                </div>
-                <h3 className="text-xl font-bold text-purple-800">
-                  Parijat Services
-                </h3>
+            <div className="ml-8">
+              <div className="flex flex-wrap gap-2">
+                <a
+                  href="https://www.youtube.com/watch?v=AA4sS5zEqeg&list=TLGGcYcGan7ykf4yMzA2MjAyNQ"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <span className="bg-blue-100 text-blue-800 px-2 py-1 cursor-pointer rounded text-xs font-medium hover:bg-blue-200 transition-colors duration-200">
+                    TeleWatch
+                  </span>
+                </a>
+                <a
+                  href="contact"
+                  className="block"
+                >
+                  <span className="bg-blue-100 cursor-pointer text-blue-800 px-2 py-1 rounded text-xs font-medium hover:bg-blue-200 transition-colors duration-200">
+                    TeleBook Live in Store
+                  </span>
+                </a>
               </div>
-              <p className="ml-12 text-purple-700 leading-relaxed">
-                It is for the solutions regarding software issues in the TeleARGlass.
-              </p>
-            </div>
-
-            {/* Service 3 */}
-            <div className="bg-gradient-to-r from-green-50 to-green-100 p-6 rounded-2xl border border-green-200 hover:shadow-lg transition-all duration-300">
-              <div className="flex items-center mb-4">
-                <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold mr-4">
-                  3
-                </div>
-                <h3 className="text-xl font-bold text-green-800">
-                  TeleMaintenance
-                </h3>
-              </div>
-              <p className="ml-12 text-green-700 leading-relaxed">
-               It is for the repairing of TeleARGlass once warranty expires.
-              </p>
-            </div>
-
-            {/* Service 4 */}
-            <div className="bg-gradient-to-r from-red-50 to-red-100 p-6 rounded-2xl border border-red-200 hover:shadow-lg transition-all duration-300">
-              <div className="flex items-center mb-4">
-                <div className="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold mr-4">
-                  4
-                </div>
-                <h3 className="text-xl font-bold text-red-800">TeleSecurity</h3>
-              </div>
-              <p className="ml-12 text-red-700 leading-relaxed">
-                It is highly expert TeleARGlass Cyber officials, if 
-              </p>
             </div>
           </div>
 
-          {/* Call to Action */}
-          {/* <div className="bg-gradient-to-r from-indigo-500 to-blue-600 text-white p-6 rounded-2xl text-center mb-6">
-            <h3 className="text-xl font-bold mb-2">Ready to Get Started?</h3>
-            <p className="mb-4 opacity-90">
-              Fill out the customer details form in each section to access our
-              premium TeleServices
+          {/* Service 2 */}
+          <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="flex items-center mb-3">
+              <div className="w-6 h-6 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold mr-2 text-xs">
+                2
+              </div>
+              <h3 className="text-base font-bold text-gray-800">
+                Parijat Services
+              </h3>
+            </div>
+            <p className="ml-8 text-gray-600 leading-relaxed text-sm">
+              It is for the solutions regarding software issues in the TeleARGlass.
             </p>
-            <button
-              className="bg-white text-indigo-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-300 shadow-lg"
-              onClick={() => router("/contact")}
-            >
-              Get Started Today
-            </button>
-          </div> */}
+          </div>
+
+          {/* Service 3 */}
+          <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="flex items-center mb-3">
+              <div className="w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center font-bold mr-2 text-xs">
+                3
+              </div>
+              <h3 className="text-base font-bold text-gray-800">
+                TeleMaintenance
+              </h3>
+            </div>
+            <p className="ml-8 text-gray-600 leading-relaxed text-sm">
+             It is for the repairing of TeleARGlass once warranty expires.
+            </p>
+          </div>
+
+          {/* Service 4 */}
+          <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="flex items-center mb-3">
+              <div className="w-6 h-6 bg-red-600 text-white rounded-full flex items-center justify-center font-bold mr-2 text-xs">
+                4
+              </div>
+              <h3 className="text-base font-bold text-gray-800">TeleSecurity</h3>
+            </div>
+            <p className="ml-8 text-gray-600 leading-relaxed text-sm">
+              It is highly expert TeleARGlass Cyber officials, if 
+            </p>
+          </div>
         </div>
       </div>
     </div>

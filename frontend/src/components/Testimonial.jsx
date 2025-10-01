@@ -24,28 +24,28 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="py-16 bg-gradient-to-b from-teal-50 via-cyan-50 to-violet-50 text-gray-900">
+    <section className="py-12 bg-gradient-to-b from-teal-50 via-cyan-50 to-violet-50 text-gray-900">
       <Container>
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-teal-700 mb-4">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-bold text-teal-700 mb-3">
             TeleExpert Review
           </h2>
-          <p className="text-cyan-700 max-w-2xl mx-auto">
-            As per Our current TeleARGlass Trials
+          <p className="text-cyan-700 max-w-2xl mx-auto text-sm">
+            As per Our current TeleARGlass Trials
           </p>
         </div>
 
-        <div className="flex min-w-40 justify-center items-center  gap-8">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-6">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="bg-white/70 backdrop-blur-sm p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300"
+              className="bg-white/80 backdrop-blur-sm p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 max-w-md"
             >
-              <div className="mb-4">
+              <div className="mb-3">
                 {[...Array(5)].map((_, i) => (
                   <svg
                     key={i}
-                    className="inline-block w-5 h-5 text-yellow-400 fill-current"
+                    className="inline-block w-4 h-4 text-yellow-400 fill-current"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                   >
@@ -53,20 +53,15 @@ const Testimonials = () => {
                   </svg>
                 ))}
               </div>
-              <p className="text-cyan-800 mb-6 italic">
+              <p className="text-cyan-800 mb-4 italic text-sm leading-relaxed">
                 "{testimonial.content}"
               </p>
               <div className="flex items-center">
-                {/* <img
-                  src={testimonial.avatar}
-                  alt={testimonial.name}
-                  className="w-12 h-12 rounded-full object-cover mr-4 border-2 border-teal-400"
-                /> */}
                 <div>
-                  <p className="font-medium text-teal-800">
+                  <p className="font-medium text-teal-800 text-sm">
                     {testimonial.name}
                   </p>
-                  <p className="text-sm text-violet-600">{testimonial.role}</p>
+                  <p className="text-xs text-violet-600">{testimonial.role}</p>
                 </div>
               </div>
             </div>
