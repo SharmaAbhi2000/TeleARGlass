@@ -1,0 +1,97 @@
+
+services:
+  # Frontend service - exposed on domain
+  telearglass-frontend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: frontend
+    container_name: telearglass-frontend
+    restart: unless-stopped
+    networks:
+      - telearglass-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Backend service - internal only
+  telearglass-backend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: backend
+    container_name: telearglass-backend
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ../.env
+    volumes:
+      # Mount logs directory for persistence
+      - ../logs:/app/logs
+      # Mount uploads directory if you have file uploads
+      - ../uploads:/app/uploads
+    networks:
+      - telearglass-network
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:4000/', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '0.5'
+        reservations:
+          memory: 512M
+          cpus: '0.25'
+
+  # Admin service - internal only
+  telearglass-admin:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: admin
+    container_name: telearglass-admin
+    restart: unless-stopped
+    networks:
+      - telearglass-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Nginx reverse proxy for production with domain support
+  nginx:
+    image: nginx:alpine
+    container_name: telearglass-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"      # HTTP (redirect to HTTPS)
+      - "443:443"    # HTTPS
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ../ssl:/etc/nginx/ssl:ro  # SSL certificates
+    depends_on:
+      - telearglass-frontend
+      - telearglass-backend
+      - telearglass-admin
+    networks:
+      - telearglass-network
+    profiles:
+      - production  # Only start with --profile production
+
+networks:
+  telearglass-network:
+    driver: bridge
+
+volumes:
+  logs:
+  uploads:

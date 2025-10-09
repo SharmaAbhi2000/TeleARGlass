@@ -1,0 +1,18 @@
+# Local development overrides
+# This file is automatically used by docker-compose for local development
+
+
+services:
+  # Override nginx for local development
+  nginx:
+    ports:
+      - "3000:80"      # Map to localhost:3000 for local development
+    volumes:
+      - ./nginx-local.conf:/etc/nginx/nginx.conf:ro
+    profiles: []       # Remove production profile requirement for local dev
+
+  # Add local development environment variables
+  telearglass-backend:
+    environment:
+      - NODE_ENV=development
+      - PORT=4000

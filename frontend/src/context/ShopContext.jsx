@@ -9,7 +9,18 @@ const ShopContextProvider = (props) => {
 
     const currency = '₹';
     const delivery_fee = 10;
-    const backendUrl = import.meta.env.VITE_BACKEND_URL
+    
+    // Dynamic backend URL detection for network access
+    const getBackendUrl = () => {
+        const envUrl = import.meta.env.VITE_BACKEND_URL;
+        if (envUrl === 'AUTO_DETECT') {
+            // Use current window location for dynamic host detection
+            return `${window.location.protocol}//${window.location.host}`;
+        }
+        return envUrl;
+    };
+    
+    const backendUrl = getBackendUrl();
     const [search, setSearch] = useState('');
     const [showSearch, setShowSearch] = useState(false);
     const [cartItems, setCartItems] = useState({});
