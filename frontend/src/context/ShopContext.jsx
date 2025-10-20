@@ -136,14 +136,20 @@ const ShopContextProvider = (props) => {
     const getCartAmount = () => {
         let totalAmount = 0;
         for (const items in cartItems) {
-            let itemInfo = products.find((product) => product._id === items);
+            const itemInfo = products.find((product) => product._id === items);
             for (const item in cartItems[items]) {
                 try {
-                    if (cartItems[items][item] > 0) {
-                        totalAmount += itemInfo.price * cartItems[items][item];
+                    const quantity = Number(cartItems[items][item]) || 0;
+                    if (quantity > 0) {
+                        // Prefer pre-book price when applicable; otherwise use actual_price, price, or discountPrice
+                        const priceCandidate = itemInfo
+                            ? (itemInfo.is_prebooking ? itemInfo.pre_book_price : (itemInfo.actual_price ?? itemInfo.price ?? itemInfo.discountPrice))
+                            : 0;
+                        const unitPrice = Number(priceCandidate) || 0;
+                        totalAmount += unitPrice * quantity;
                     }
                 } catch (error) {
-
+                    // Ignore and continue; safest behavior is to skip invalid entries
                 }
             }
         }
@@ -203,15 +209,13 @@ const ShopContextProvider = (props) => {
             if (localCartData) {
                 const parsedCartData = JSON.parse(localCartData);
                 
-                // Send each item to database
+                // Use update instead of add to set correct quantities
                 for (const itemId in parsedCartData) {
                     for (const size in parsedCartData[itemId]) {
                         const quantity = parsedCartData[itemId][size];
                         if (quantity > 0) {
-                            // Add each item to database cart
-                            for (let i = 0; i < quantity; i++) {
-                                await axios.post(backendUrl + '/api/cart/add', { itemId, size }, { headers: { token } });
-                            }
+                            // Update cart with correct quantity instead of adding one by one
+                            await axios.post(backendUrl + '/api/cart/update', { itemId, size, quantity }, { headers: { token } });
                         }
                     }
                 }
@@ -244,12 +248,20 @@ const ShopContextProvider = (props) => {
         if (!token && localStorage.getItem('token')) {
             const savedToken = localStorage.getItem('token')
             setToken(savedToken)
-            
-            // Sync localStorage cart with database when user logs in
-            syncCartWithDatabase(savedToken)
         }
+    }, [])
+
+    useEffect(() => {
         if (token) {
-            getUserCart(token)
+            // Check if there's localStorage data to sync before fetching from database
+            const localCartData = localStorage.getItem('cartData');
+            if (localCartData) {
+                // Sync localStorage cart with database
+                syncCartWithDatabase(token);
+            } else {
+                // No localStorage data, just fetch from database
+                getUserCart(token);
+            }
         }
     }, [token])
 

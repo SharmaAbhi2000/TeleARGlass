@@ -82,22 +82,25 @@ const Navbar = () => {
         <div className="group relative">
           <img
             onClick={() => (token ? null : navigate("/login"))}
-            className="w-5 cursor-pointer"
+            className="w-5 cursor-pointer hover:opacity-70 transition-opacity duration-200"
             src={assets.profile_icon}
-            alt=""
+            alt="User Profile"
           />
           {/* Dropdown Menu */}
           {token && (
-            <div className="group-hover:block hidden absolute dropdown-menu right-0 pt-4">
-              <div className="flex flex-col gap-2 w-36 py-3 px-5  bg-slate-100 text-gray-500 rounded">
-                <p className="cursor-pointer hover:text-black">My Profile</p>
+            <div className="group-hover:block hidden absolute dropdown-menu right-0 pt-4 z-50">
+              <div className="flex flex-col gap-2 w-40 py-3 px-4 bg-white text-gray-700 rounded-lg shadow-lg border border-gray-200">
+                <p className="cursor-pointer hover:text-black hover:bg-gray-50 px-2 py-1 rounded transition-colors duration-200">
+                  My Profile
+                </p>
                 <p
                   onClick={() => navigate("/orders")}
-                  className="cursor-pointer hover:text-black"
+                  className="cursor-pointer hover:text-black hover:bg-gray-50 px-2 py-1 rounded transition-colors duration-200"
                 >
-                  Orders
+                  My Orders
                 </p>
-                <p onClick={logout} className="cursor-pointer hover:text-black">
+                <hr className="border-gray-200" />
+                <p onClick={logout} className="cursor-pointer hover:text-red-600 hover:bg-red-50 px-2 py-1 rounded transition-colors duration-200">
                   Logout
                 </p>
               </div>
@@ -135,39 +138,66 @@ const Navbar = () => {
         <div className="flex flex-col text-gray-600">
           <div
             onClick={() => setVisible(false)}
-            className="flex items-center gap-4 p-3 cursor-pointer"
+            className="flex items-center gap-4 p-3 cursor-pointer border-b"
           >
             <img className="h-4 rotate-180" src={assets.dropdown_icon} alt="" />
             <p>Back</p>
           </div>
+          
+          {/* Navigation Links */}
           <NavLink
             onClick={() => setVisible(false)}
-            className="py-2 pl-6 border"
+            className="py-3 pl-6 border-b hover:bg-gray-50 transition-colors duration-200"
             to="/"
           >
             HOME
           </NavLink>
           <NavLink
             onClick={() => setVisible(false)}
-            className="py-2 pl-6 border"
+            className="py-3 pl-6 border-b hover:bg-gray-50 transition-colors duration-200"
             to="/teleProducts"
           >
             COLLECTION
           </NavLink>
           <NavLink
             onClick={() => setVisible(false)}
-            className="py-2 pl-6 border"
+            className="py-3 pl-6 border-b hover:bg-gray-50 transition-colors duration-200"
             to="/teleServices"
           >
             ABOUT
           </NavLink>
           <NavLink
             onClick={() => setVisible(false)}
-            className="py-2 pl-6 border"
+            className="py-3 pl-6 border-b hover:bg-gray-50 transition-colors duration-200"
             to="/contact"
           >
             CONTACT
           </NavLink>
+
+          {/* User Menu Items (only show if logged in) */}
+          {token && (
+            <>
+              <div className="border-t border-b my-2"></div>
+              <div
+                onClick={() => {
+                  setVisible(false);
+                  navigate("/orders");
+                }}
+                className="py-3 pl-6 border-b hover:bg-gray-50 transition-colors duration-200 cursor-pointer"
+              >
+                MY ORDERS
+              </div>
+              <div
+                onClick={() => {
+                  setVisible(false);
+                  logout();
+                }}
+                className="py-3 pl-6 hover:bg-gray-50 transition-colors duration-200 cursor-pointer text-red-600"
+              >
+                LOGOUT
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -9,6 +9,7 @@ const orderSchema = new mongoose.Schema({
     paymentMethod: { type: String, required: true },
     payment: { type: Boolean, required: true , default: false },
     date: {type: Number, required:true},
+    deliveredDate: { type: Number }, // When order was delivered for time validation    
     
     // Pre-booking payment structure
     prebooking: {
@@ -19,8 +20,54 @@ const orderSchema = new mongoose.Schema({
         remainingPaymentStatus: { type: String, default: 'pending' }, // pending, paid, failed
         firstPaymentDate: { type: Number }, // When first payment was made
         remainingPaymentDate: { type: Number }, // When remaining payment was made
-    }
+    },
+    
+    // Order management features
+    canCancel: { type: Boolean, default: true }, // Can cancel order anytime before delivery
+    cancelRequest: {
+        isRequested: { type: Boolean, default: false },
+        requestDate: { type: Number },
+        reason: { type: String },
+        status: { type: String, default: 'pending' } // pending, approved, rejected
+    },
+    
+    // Replace order (within 5 days of delivery)
+    replaceRequest: {
+        isRequested: { type: Boolean, default: false },
+        requestDate: { type: Number },
+        reason: { type: String },
+        status: { type: String, default: 'pending' } // pending, approved, rejected, completed
+    },
+    
+    // Free repair (within 3 months of delivery)
+    repairRequest: {
+        isRequested: { type: Boolean, default: false },
+        requestDate: { type: Number },
+        issue: { type: String },
+        status: { type: String, default: 'pending' } // pending, in_progress, completed, rejected
+    },
+
+    // Item-level requests submitted by user via Orders page
+    itemRequests: [{
+        itemIndex: { type: Number },
+        productId: { type: String },
+        name: { type: String },
+        size: { type: String },
+        quantity: { type: Number },
+        type: { type: String, enum: ['cancel', 'replace', 'repair'], required: true },
+        description: { type: String },
+        status: { type: String, default: 'pending' }, // pending, approved, rejected, resolved
+        requestedAt: { type: Number, default: () => Date.now() }
+    }]
 })
+
+// Add database indexes for better performance with multiple users
+orderSchema.index({ userId: 1, date: -1 }); // For user orders query (most important)
+orderSchema.index({ status: 1 }); // For admin order filtering
+orderSchema.index({ date: -1 }); // For order listing
+orderSchema.index({ 'prebooking.isPrebooking': 1 }); // For pre-booking queries
+orderSchema.index({ 'itemRequests.type': 1 });
+orderSchema.index({ 'itemRequests.status': 1 });
 
 const orderModel = mongoose.models.order || mongoose.model('order',orderSchema)
 export default orderModel;

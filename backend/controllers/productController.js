@@ -8,16 +8,25 @@ const addProduct = async (req, res) => {
         const {
           name,
           description,
+          // New pricing fields
+          actual_price,
+          discountPrice,
+          is_prebooking,
+          pre_book_price,
+          post_book_price,
+
+          // Backward compatibility fields
           price,
+          prebookingEnabled,
+          firstPaymentPercentage,
+
+          // Unused/back-compat (kept to avoid breaking existing admin forms)
           category,
           subCategory,
           sizes,
           features,
           bestseller,
-          discountPrice,
           subscribtion,
-          prebookingEnabled,
-          firstPaymentPercentage,
         } = req.body;
         const image1 = req.files.image1 && req.files.image1[0]
         const image2 = req.files.image2 && req.files.image2[0]
@@ -33,32 +42,50 @@ const addProduct = async (req, res) => {
             })
         )
 
-        // Calculate pre-booking amounts
-        const isPrebookingEnabled = prebookingEnabled === "true" ? true : false;
-        const percentage = firstPaymentPercentage ? Number(firstPaymentPercentage) : 29;
-        const firstPaymentAmount = isPrebookingEnabled ? Math.round(Number(price) * (percentage / 100)) : 0;
-        const remainingAmount = isPrebookingEnabled ? Number(price) - firstPaymentAmount : 0;
+        // Normalize pricing fields (support both new and old payloads)
+        const normalizedActualPrice =
+          actual_price !== undefined
+            ? Number(actual_price)
+            : price !== undefined
+              ? Number(price)
+              : 0;
+
+        const normalizedIsPrebooking =
+          is_prebooking !== undefined
+            ? (typeof is_prebooking === "string" ? is_prebooking === "true" : Boolean(is_prebooking))
+            : prebookingEnabled !== undefined
+              ? (typeof prebookingEnabled === "string" ? prebookingEnabled === "true" : Boolean(prebookingEnabled))
+              : false;
+
+        // If only percentage provided (legacy), derive split from actual price
+        const percentage = firstPaymentPercentage ? Number(firstPaymentPercentage) : 0;
+        const derivedPreBook = normalizedIsPrebooking && percentage > 0
+          ? Math.round(normalizedActualPrice * (percentage / 100))
+          : undefined;
+        const derivedPostBook = normalizedIsPrebooking && percentage > 0
+          ? Math.max(0, normalizedActualPrice - (derivedPreBook || 0))
+          : undefined;
+
+        const normalizedPreBook = pre_book_price !== undefined ? Number(pre_book_price) : (derivedPreBook || 0);
+        const normalizedPostBook = post_book_price !== undefined ? Number(post_book_price) : (derivedPostBook || 0);
 
         const productData = {
           name,
           description,
-          price: Number(price),
           image: imagesUrl,
           category,
           features,
-          bestseller: bestseller === "true" ? true : false,
-          subscribtion: subscribtion === "true" ? true : false,
-          
-          // Pre-booking data
-          prebooking: {
-            enabled: isPrebookingEnabled,
-            firstPaymentPercentage: percentage,
-            firstPaymentAmount: firstPaymentAmount,
-            remainingAmount: remainingAmount,
-          },
+          bestseller: typeof bestseller === "string" ? bestseller === "true" : Boolean(bestseller),
+          subscribtion: typeof subscribtion === "string" ? subscribtion === "true" : Boolean(subscribtion),
+
+          // New pricing structure
+          actual_price: normalizedActualPrice,
+          discountPrice: Number(discountPrice),
+          is_prebooking: normalizedIsPrebooking,
+          pre_book_price: normalizedPreBook,
+          post_book_price: normalizedPostBook,
 
           date: Date.now(),
-          discountPrice: Number(discountPrice),
         };
 
        //console.log(productData);
@@ -79,7 +106,15 @@ const listProducts = async (req, res) => {
     try {
         
         const products = await productModel.find({});
-        res.json({success:true,products})
+        // Backward compatibility: include derived price field for frontend expecting price
+        const mapped = products.map((doc) => {
+            const obj = doc.toObject();
+            if (obj.actual_price !== undefined && obj.price === undefined) {
+                obj.price = obj.actual_price;
+            }
+            return obj;
+        });
+        res.json({success:true,products: mapped})
 
     } catch (error) {
         console.log(error)
@@ -105,7 +140,14 @@ const singleProduct = async (req, res) => {
     try {
         
         const { productId } = req.body
-        const product = await productModel.findById(productId)
+        const productDoc = await productModel.findById(productId)
+        if (!productDoc) {
+            return res.json({ success: false, message: 'Product not found' })
+        }
+        const product = productDoc.toObject();
+        if (product.actual_price !== undefined && product.price === undefined) {
+            product.price = product.actual_price;
+        }
         res.json({success:true,product})
 
     } catch (error) {
