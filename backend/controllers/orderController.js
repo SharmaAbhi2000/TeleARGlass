@@ -15,7 +15,7 @@ requiredEnvVars.forEach(varName => {
 
 // global variables
 const currency = 'inr'
-const deliveryCharge = 10
+const deliveryCharge = 0
 
 // gateway initialize
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
@@ -111,7 +111,7 @@ const placeOrder = async (req,res) => {
             }
 
             const { nowDueSubTotal, fullOrderSubTotal, normalizedItems } = await computeServerSideTotals(items || []);
-            const amount = nowDueSubTotal + deliveryCharge;
+    const amount = nowDueSubTotal + 0;
 
             const orderData = {
                 userId,
@@ -150,7 +150,7 @@ const placeOrderStripe = async (req,res) => {
         }
 
         const { nowDueSubTotal, normalizedItems } = await computeServerSideTotals(items || []);
-        const amount = nowDueSubTotal + deliveryCharge;
+        const amount = nowDueSubTotal + 0;
 
         const orderData = {
             userId,
@@ -177,16 +177,7 @@ const placeOrderStripe = async (req,res) => {
             quantity: item.quantity
         }))
 
-        line_items.push({
-            price_data: {
-                currency: currency,
-                product_data: {
-                    name: 'Delivery Charges'
-                },
-                unit_amount: deliveryCharge * 100
-            },
-            quantity: 1
-        })
+        // Delivery charge removed
 
         const stripeSession = await stripe.checkout.sessions.create({
             success_url: `${origin}/verify?success=true&orderId=${newOrder._id}`,
@@ -391,7 +382,7 @@ const placePrebookingOrder = async (req, res) => {
                 }
             }
 
-            const totalAmount = firstPaymentAmount + remainingAmount + deliveryCharge;
+            const totalAmount = firstPaymentAmount + remainingAmount + 0;
 
             const orderData = {
                 userId,

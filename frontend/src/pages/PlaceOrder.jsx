@@ -10,7 +10,7 @@ import { User, MapPin, CreditCard, Truck, Shield, CheckCircle } from 'lucide-rea
 const PlaceOrder = () => {
 
     const [method, setMethod] = useState('cod');
-    const { navigate, backendUrl, token, cartItems, setCartItems, getCartAmount, delivery_fee, products } = useContext(ShopContext);
+    const { navigate, backendUrl, token, cartItems, setCartItems, getCartAmount, products } = useContext(ShopContext);
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -79,7 +79,7 @@ const PlaceOrder = () => {
             let orderData = {
                 address: formData,
                 items: orderItems,
-                amount: getCartAmount() + delivery_fee
+                amount: getCartAmount()
             }
             
 

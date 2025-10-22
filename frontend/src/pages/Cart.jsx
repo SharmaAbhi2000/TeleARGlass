@@ -37,7 +37,7 @@ console.log(products);
         <div className='mb-6'>
           <div className='inline-flex gap-2 items-center mb-2'>
             <p className='text-3xl sm:text-4xl text-gray-400 font-light'>
-              YOUR <span className='text-gray-800 font-bold'>CART</span>
+              YOUR <span className='text-gray-800 font-bold'>TeleCART</span>
             </p>
           </div>
           <p className='text-gray-600 text-sm'>Review your items and proceed to checkout</p>
