@@ -402,16 +402,24 @@ const Recruitment = () => {
                 />
               </div>
 
-              <div className="relative">
-                <Upload className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-                <input
-                  type="file"
-                  name="resume"
-                  accept=".pdf,.doc,.docx"
-                  required
-                  onChange={handleFormChange}
-                  className="w-full pl-10 pr-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-800 file:bg-teal-600 file:text-white file:border-0 file:rounded-lg file:px-3 file:py-1 file:mr-3 file:cursor-pointer hover:file:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200"
-                />
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700">
+                  Resume Upload
+                </label>
+                <div className="relative">
+                  <Upload className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <input
+                    type="file"
+                    name="resume"
+                    accept=".pdf,.doc,.docx"
+                    required
+                    onChange={handleFormChange}
+                    className="w-full pl-10 pr-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-800 file:bg-teal-600 file:text-white file:border-0 file:rounded-lg file:px-3 file:py-1 file:mr-3 file:cursor-pointer hover:file:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200"
+                  />
+                </div>
+                <p className="text-xs text-gray-500">
+                  Upload your resume in PDF, DOC, or DOCX format
+                </p>
               </div>
 
               <button

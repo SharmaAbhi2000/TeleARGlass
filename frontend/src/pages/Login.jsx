@@ -3,6 +3,7 @@ import { ShopContext } from '../context/ShopContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { User, Mail, Lock, Eye, EyeOff, LogIn, UserPlus } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
 
@@ -13,9 +14,42 @@ const Login = () => {
   const [password,setPasword] = useState('')
   const [email,setEmail] = useState('')
   const [showPassword, setShowPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [errors, setErrors] = useState({})
+
+  const validateForm = () => {
+    const newErrors = {};
+    
+    if (currentState === 'Sign Up' && !name.trim()) {
+      newErrors.name = 'Full name is required';
+    }
+    
+    if (!email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+    
+    if (!password.trim()) {
+      newErrors.password = 'Password is required';
+    } else if (password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const onSubmitHandler = async (event) => {
       event.preventDefault();
+      
+      if (!validateForm()) {
+        return;
+      }
+      
+      setIsLoading(true);
+      setErrors({});
+      
       try {
         if (currentState === 'Sign Up') {
           
@@ -42,7 +76,9 @@ const Login = () => {
 
       } catch (error) {
         console.log(error)
-        toast.error(error.message)
+        toast.error(error.response?.data?.message || error.message || 'Something went wrong')
+      } finally {
+        setIsLoading(false);
       }
   }
 
@@ -53,7 +89,7 @@ const Login = () => {
   },[token])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-blue-50 to-emerald-50 flex items-center justify-center py-4 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-4 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-6">
         {/* Header */}
         <div className="text-center">
@@ -64,8 +100,8 @@ const Login = () => {
           </div>
           <p className="text-gray-600 text-sm">
             {currentState === 'Login' 
-              ? 'Sign in to your account to continue' 
-              : 'Join us and start your journey'
+              ? 'Sign in to your TeleARGlass account to continue' 
+              : 'Join TeleARGlass and start your journey'
             }
           </p>
         </div>
@@ -87,10 +123,15 @@ const Login = () => {
                     onChange={(e) => setName(e.target.value)}
                     value={name}
                     type="text"
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors"
+                    className={`w-full pl-10 pr-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+                      errors.name ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                    }`}
                     placeholder="Enter your full name"
                     required
                   />
+                  {errors.name && (
+                    <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+                  )}
                 </div>
               </div>
             )}
@@ -108,10 +149,15 @@ const Login = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
                   type="email"
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors"
+                  className={`w-full pl-10 pr-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+                    errors.email ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                  }`}
                   placeholder="Enter your email"
                   required
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+                )}
               </div>
             </div>
 
@@ -128,10 +174,15 @@ const Login = () => {
                   onChange={(e) => setPasword(e.target.value)}
                   value={password}
                   type={showPassword ? "text" : "password"}
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors"
+                  className={`w-full pl-10 pr-12 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+                    errors.password ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                  }`}
                   placeholder="Enter your password"
                   required
                 />
+                {errors.password && (
+                  <p className="text-red-500 text-xs mt-1">{errors.password}</p>
+                )}
                 <button
                   type="button"
                   className="absolute inset-y-0 right-0 pr-3 flex items-center"
@@ -149,21 +200,31 @@ const Login = () => {
             {/* Forgot Password (only for Login) */}
             {currentState === 'Login' && (
               <div className="flex items-center justify-end">
-                <button
-                  type="button"
-                  className="text-sm text-teal-600 hover:text-teal-500 font-medium"
+                <Link
+                  to="/forgot-password"
+                  className="text-sm text-blue-600 hover:text-blue-500 font-medium"
                 >
                   Forgot your password?
-                </button>
+                </Link>
               </div>
             )}
 
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2 shining-button shining-emerald"
+              disabled={isLoading}
+              className={`w-full font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2 ${
+                isLoading 
+                  ? 'bg-gray-400 cursor-not-allowed' 
+                  : 'bg-blue-600 hover:bg-blue-700 text-white'
+              }`}
             >
-              {currentState === 'Login' ? (
+              {isLoading ? (
+                <>
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                  <span>Processing...</span>
+                </>
+              ) : currentState === 'Login' ? (
                 <>
                   <LogIn className="h-5 w-5" />
                   <span>Sign In</span>
@@ -183,7 +244,7 @@ const Login = () => {
                 <button
                   type="button"
                   onClick={() => setCurrentState(currentState === 'Login' ? 'Sign Up' : 'Login')}
-                  className="ml-2 text-teal-600 hover:text-teal-500 font-medium"
+                  className="ml-2 text-blue-600 hover:text-blue-500 font-medium"
                 >
                   {currentState === 'Login' ? 'Sign up' : 'Sign in'}
                 </button>

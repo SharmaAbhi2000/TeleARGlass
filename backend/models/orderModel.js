@@ -39,7 +39,7 @@ const orderSchema = new mongoose.Schema({
         status: { type: String, default: 'pending' } // pending, approved, rejected, completed
     },
     
-    // Free repair (within 3 months of delivery)
+    // Tele Modify request (within 9 months of order)
     repairRequest: {
         isRequested: { type: Boolean, default: false },
         requestDate: { type: Number },
@@ -54,11 +54,19 @@ const orderSchema = new mongoose.Schema({
         name: { type: String },
         size: { type: String },
         quantity: { type: Number },
-        type: { type: String, enum: ['cancel', 'replace', 'repair'], required: true },
+        type: { type: String, enum: ['cancel', 'replace', 'repair', 'modify'], required: true },
         description: { type: String },
         status: { type: String, default: 'pending' }, // pending, approved, rejected, resolved
         requestedAt: { type: Number, default: () => Date.now() }
-    }]
+    }],
+
+    // Rating system for each order
+    rating: {
+        isRated: { type: Boolean, default: false },
+        rating: { type: Number, min: 1, max: 5 },
+        review: { type: String },
+        ratedAt: { type: Number }
+    }
 })
 
 // Add database indexes for better performance with multiple users

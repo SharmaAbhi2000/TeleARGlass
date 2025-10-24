@@ -1,8 +1,9 @@
 import React, { useContext } from 'react'
 import { ShopContext } from '../context/ShopContext'
 import { useNavigate } from "react-router-dom";
+import { Star } from "lucide-react"
 
-const ProductItem = ({id,image,name,price}) => {
+const ProductItem = ({id,image,name,price,avg_rating,total_ratings}) => {
     
     const {currency} = useContext(ShopContext);
     const navigate = useNavigate();
@@ -26,6 +27,26 @@ const ProductItem = ({id,image,name,price}) => {
           <p className="text-sm font-medium text-gray-900 line-clamp-2 group-hover:text-gray-700 transition-colors duration-200">
             {name}
           </p>
+          
+          {/* Rating */}
+          {avg_rating > 0 && (
+            <div className="flex items-center space-x-1">
+              <div className="flex items-center">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star 
+                    key={star}
+                    className={`w-3 h-3 ${
+                      star <= avg_rating ? 'text-yellow-400 fill-current' : 'text-gray-300'
+                    }`}
+                  />
+                ))}
+              </div>
+              <span className="text-xs text-gray-500">
+                {avg_rating} ({total_ratings || 0})
+              </span>
+            </div>
+          )}
+          
           <p className="text-sm font-semibold text-gray-900 group-hover:text-teal-600 transition-colors duration-200">
             {currency}
             {price}

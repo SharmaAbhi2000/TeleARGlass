@@ -138,12 +138,15 @@ const Product = () => {
                       <Star 
                         key={star}
                         className={`w-5 h-5 ${
-                          star <= 4 ? 'text-yellow-400 fill-current' : 'text-gray-300'
+                          star <= (productData.avg_rating || 0) ? 'text-yellow-400 fill-current' : 'text-gray-300'
                         }`}
                       />
                     ))}
                   </div>
-                  <span className="text-sm text-gray-600">(122 reviews)</span>
+                  <span className="text-sm text-gray-600">
+                    {productData.avg_rating ? `${productData.avg_rating}/5` : 'No ratings yet'} 
+                    ({productData.total_ratings || 0} reviews)
+                  </span>
                 </div>
               </div>
 
@@ -199,40 +202,6 @@ const Product = () => {
                 </button>
               </div>
 
-              {/* Trust Badges */}
-              <div className="border-t pt-6">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-green-100 rounded-lg">
-                      <Truck className="w-5 h-5 text-green-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-gray-900">Free Shipping</p>
-                      <p className="text-xs text-gray-500">On orders over $50</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-blue-100 rounded-lg">
-                      <Shield className="w-5 h-5 text-blue-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-gray-900">Secure Payment</p>
-                      <p className="text-xs text-gray-500">100% Protected</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-purple-100 rounded-lg">
-                      <RotateCcw className="w-5 h-5 text-purple-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-gray-900">Easy Returns</p>
-                      <p className="text-xs text-gray-500">30-day policy</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

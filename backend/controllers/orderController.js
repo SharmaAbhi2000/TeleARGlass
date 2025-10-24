@@ -559,7 +559,7 @@ const createItemRequest = async (req, res) => {
             return res.json({ success: false, message: 'orderId, itemIndex and type are required' });
         }
 
-        if (!['cancel', 'replace', 'repair'].includes(type)) {
+        if (!['cancel', 'replace', 'repair', 'modify'].includes(type)) {
             return res.json({ success: false, message: 'Invalid request type' });
         }
 
@@ -711,7 +711,7 @@ const replaceOrderRequest = async (req, res) => {
     }
 }
 
-// Repair Request (within 3 months)
+// Tele Modify Request (within 9 months of order)
 const repairOrderRequest = async (req, res) => {
     try {
         const { orderId, issue } = req.body;
@@ -722,22 +722,17 @@ const repairOrderRequest = async (req, res) => {
             return res.json({ success: false, message: "Order not found" });
         }
 
-        // Check if order is delivered
-        if (order.status !== 'Delivered') {
-            return res.json({ success: false, message: "Order must be delivered first" });
-        }
-
-        // Check if within 3 months of delivery
-        const deliveryDate = order.deliveredDate || order.date;
-        const threeMonthsInMs = 3 * 30 * 24 * 60 * 60 * 1000; // 3 months in milliseconds (approximate)
+        // Check if within 9 months of order date
+        const orderDate = order.date;
+        const nineMonthsInMs = 9 * 30 * 24 * 60 * 60 * 1000; // 9 months in milliseconds (approximate)
         const currentTime = Date.now();
         
-        if (currentTime - deliveryDate > threeMonthsInMs) {
-            return res.json({ success: false, message: "Repair request must be made within 3 months of delivery" });
+        if (currentTime - orderDate > nineMonthsInMs) {
+            return res.json({ success: false, message: "Tele Modify request must be made within 9 months of order date" });
         }
 
         if (order.repairRequest.isRequested) {
-            return res.json({ success: false, message: "Repair request already submitted" });
+            return res.json({ success: false, message: "Tele Modify request already submitted" });
         }
 
         await orderModel.findByIdAndUpdate(orderId, {
@@ -747,7 +742,7 @@ const repairOrderRequest = async (req, res) => {
             'repairRequest.status': 'pending'
         });
 
-        res.json({ success: true, message: "Repair request submitted successfully" });
+        res.json({ success: true, message: "Tele Modify request submitted successfully" });
 
     } catch (error) {
         console.log(error);
@@ -755,4 +750,69 @@ const repairOrderRequest = async (req, res) => {
     }
 }
 
-export {verifyRazorpay, verifyStripe ,placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus, placePrebookingOrder, updatePrebookingPayment, payRemainingAmount, verifyRemainingPayment, cancelOrderRequest, cancelOrderDirect, replaceOrderRequest, repairOrderRequest, createItemRequest}
+// Submit Order Rating
+const submitOrderRating = async (req, res) => {
+    try {
+        const { orderId, rating, review } = req.body;
+        const { userId } = req.body; // From auth middleware
+
+        // Validate rating
+        if (!rating || rating < 1 || rating > 5) {
+            return res.json({ success: false, message: "Rating must be between 1 and 5" });
+        }
+
+        const order = await orderModel.findOne({ _id: orderId, userId });
+        if (!order) {
+            return res.json({ success: false, message: "Order not found" });
+        }
+
+        if (order.rating.isRated) {
+            return res.json({ success: false, message: "Order already rated" });
+        }
+
+        // Update order rating
+        await orderModel.findByIdAndUpdate(orderId, {
+            'rating.isRated': true,
+            'rating.rating': rating,
+            'rating.review': review || '',
+            'rating.ratedAt': Date.now()
+        });
+
+        // Update product average rating for each item in the order
+        for (const item of order.items) {
+            if (item._id) {
+                await updateProductRating(item._id, rating);
+            }
+        }
+
+        res.json({ success: true, message: "Rating submitted successfully" });
+
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+// Helper function to update product average rating
+const updateProductRating = async (productId, newRating) => {
+    try {
+        const product = await productModel.findById(productId);
+        if (!product) return;
+
+        const currentTotalRatings = product.total_ratings || 0;
+        const currentAvgRating = product.avg_rating || 0;
+        
+        // Calculate new average
+        const newTotalRatings = currentTotalRatings + 1;
+        const newAvgRating = ((currentAvgRating * currentTotalRatings) + newRating) / newTotalRatings;
+
+        await productModel.findByIdAndUpdate(productId, {
+            avg_rating: Math.round(newAvgRating * 10) / 10, // Round to 1 decimal place
+            total_ratings: newTotalRatings
+        });
+    } catch (error) {
+        console.log('Error updating product rating:', error);
+    }
+}
+
+export {verifyRazorpay, verifyStripe ,placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus, placePrebookingOrder, updatePrebookingPayment, payRemainingAmount, verifyRemainingPayment, cancelOrderRequest, cancelOrderDirect, replaceOrderRequest, repairOrderRequest, createItemRequest, submitOrderRating}

@@ -33,6 +33,8 @@ const LatestCollection = () => {
                 image={item.image}
                 name={item.name}
                 price={item.price}
+                avg_rating={item.avg_rating}
+                total_ratings={item.total_ratings}
               />
             )
         )}

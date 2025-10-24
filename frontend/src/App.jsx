@@ -18,30 +18,44 @@ import Verify from './pages/Verify'
 import Recruitment from './pages/Recuriment'
 import ContactForm from './components/ContactForm'
 import BgProvider from './BgProvider'
+import Profile from './pages/Profile'
+import ForgotPassword from './pages/ForgotPassword'
 
 const App = () => {
   return (
-    <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[0px] ">
-      {/* <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]"> */}
-      <ToastContainer />
+    <div className="min-h-screen bg-gray-50">
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        className="mt-16"
+      />
       <Navbar />
       <SearchBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/teleProducts" element={<Collection />} />
-        <Route path="/recuriment" element={<Recruitment />} />
-
-        <Route path="/teleServices" element={<About />} />
-        {/* <Route path="/contact" element={<Contact />} /> */}
-        <Route path="/contact" element={<ContactForm />} />
-
-        <Route path="/product/:productId" element={<Product />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/place-order" element={<PlaceOrder />} />
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/verify" element={<Verify />} />
-      </Routes>
+      <main className="flex-1">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/teleProducts" element={<Collection />} />
+          <Route path="/recuriment" element={<Recruitment />} />
+          <Route path="/teleServices" element={<About />} />
+          <Route path="/contact" element={<ContactForm />} />
+          <Route path="/product/:productId" element={<Product />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/place-order" element={<PlaceOrder />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/verify" element={<Verify />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+        </Routes>
+      </main>
       <Footer />
     </div>
   );

@@ -26,181 +26,266 @@ const Navbar = () => {
     }
 
   return (
-    <div className="flex items-center justify-between py-5 font-medium px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] ">
-      <Link to="/">
-        {" "}
-        <span className="flex flex-row justify-center items-center space-x-5 ">
-          <img src={assets.logo} className="w-36 rounded-lg " alt="" />
-          <div className="inline-flex gap-1 items-center">
-            <p className="text-xl text-gray-400 font-light">
-             <span className="text-gray-800 font-bold">TeleARGlass</span>
-            </p>
-          </div>
-        </span>{" "}
-      </Link>
-
-      <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
-         <NavLink to="/" className="flex flex-col items-center gap-1">
-           <p>Home</p>
-           <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
-         </NavLink>
-        <NavLink
-          to="/teleProducts"
-          className="flex flex-col items-center gap-1"
-        >
-          <p>TeleProducts</p>
-          <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
-        </NavLink>
-        <NavLink
-          to="/teleServices"
-          className="flex flex-col items-center gap-1"
-        >
-          <p>TeleServices</p>
-          <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
-        </NavLink>
-        <NavLink to="/recuriment" className="flex flex-col items-center gap-1">
-          <p>TeleRecuriment</p>
-          <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
-        </NavLink>
-        <NavLink to="/contact" className="flex flex-col items-center gap-1">
-          <p>TeleModify</p>
-          <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
-        </NavLink>
-      </ul>
-
-      <div className="flex items-center gap-6">
-        <img
-          onClick={() => {
-            setShowSearch(true);
-            navigate("/collection");
-          }}
-          src={assets.search_icon}
-          className="w-5 cursor-pointer"
-          alt=""
-        />
-
-        <div className="group relative">
-          <img
-            onClick={() => (token ? null : navigate("/login"))}
-            className="w-5 cursor-pointer hover:opacity-70 transition-opacity duration-200"
-            src={assets.profile_icon}
-            alt="User Profile"
-          />
-          {/* Dropdown Menu */}
-          {token && (
-            <div className="group-hover:block hidden absolute dropdown-menu right-0 pt-4 z-50">
-              <div className="flex flex-col gap-2 w-40 py-3 px-4 bg-white text-gray-700 rounded-lg shadow-lg border border-gray-200">
-                <p className="cursor-pointer hover:text-black hover:bg-gray-50 px-2 py-1 rounded transition-colors duration-200">
-                  My Profile
-                </p>
-                <p
-                  onClick={() => navigate("/orders")}
-                  className="cursor-pointer hover:text-black hover:bg-gray-50 px-2 py-1 rounded transition-colors duration-200"
-                >
-                  My Orders
-                </p>
-                <hr className="border-gray-200" />
-                <p onClick={logout} className="cursor-pointer hover:text-red-600 hover:bg-red-50 px-2 py-1 rounded transition-colors duration-200">
-                  Logout
-                </p>
-              </div>
-            </div>
-          )}
-        </div>
-        <Link to="/cart" className="relative">
+    <nav className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
+      <div className="flex items-center justify-between py-4 px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
+        <Link to="/" className="flex items-center space-x-4 group">
           <img 
-            src={assets.cart_icon} 
-            className={`w-5 min-w-5 transition-all duration-300 ${
-              cartAnimation ? 'animate-bounce scale-110' : ''
-            }`} 
-            alt="" 
+            src={assets.logo} 
+            className="h-16 rounded-xl shadow-sm group-hover:shadow-md transition-all duration-300" 
+            alt="TeleARGlass Logo" 
           />
-          <p className={`absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px] transition-all duration-300 ${
-            cartAnimation ? 'scale-125 bg-green-600 animate-pulse' : ''
-          }`}>
-            {getCartCount()}
-          </p>
+          <span className="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+            TeleARGlass
+          </span>
         </Link>
-        <img
-          onClick={() => setVisible(true)}
-          src={assets.menu_icon}
-          className="w-5 cursor-pointer sm:hidden"
-          alt=""
-        />
+
+        <ul className="hidden lg:flex items-center space-x-8">
+          <NavLink 
+            to="/" 
+            className={({ isActive }) => 
+              `relative px-3 py-2 text-sm font-medium transition-all duration-300 rounded-lg ${
+                isActive 
+                  ? 'text-blue-600 bg-blue-50' 
+                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+              }`
+            }
+          >
+            Home
+          </NavLink>
+          <NavLink 
+            to="/teleProducts" 
+            className={({ isActive }) => 
+              `relative px-3 py-2 text-sm font-medium transition-all duration-300 rounded-lg ${
+                isActive 
+                  ? 'text-blue-600 bg-blue-50' 
+                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+              }`
+            }
+          >
+            TeleProducts
+          </NavLink>
+          <NavLink 
+            to="/teleServices" 
+            className={({ isActive }) => 
+              `relative px-3 py-2 text-sm font-medium transition-all duration-300 rounded-lg ${
+                isActive 
+                  ? 'text-blue-600 bg-blue-50' 
+                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+              }`
+            }
+          >
+            TeleServices
+          </NavLink>
+          <NavLink 
+            to="/recuriment" 
+            className={({ isActive }) => 
+              `relative px-3 py-2 text-sm font-medium transition-all duration-300 rounded-lg ${
+                isActive 
+                  ? 'text-blue-600 bg-blue-50' 
+                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+              }`
+            }
+          >
+            TeleRecruitment
+          </NavLink>
+          <NavLink 
+            to="/contact" 
+            className={({ isActive }) => 
+              `relative px-3 py-2 text-sm font-medium transition-all duration-300 rounded-lg ${
+                isActive 
+                  ? 'text-blue-600 bg-blue-50' 
+                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+              }`
+            }
+          >
+            TeleFeedback
+          </NavLink>
+        </ul>
+
+        <div className="flex items-center space-x-4">
+          <button
+            onClick={() => {
+              setShowSearch(true);
+              navigate("/teleProducts");
+            }}
+            className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300"
+            aria-label="Search"
+          >
+            <img src={assets.search_icon} className="w-5 h-5" alt="Search" />
+          </button>
+
+          <div className="relative group">
+            <button
+              onClick={() => (token ? null : navigate("/login"))}
+              className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300"
+              aria-label="User Profile"
+            >
+              <img src={assets.profile_icon} className="w-5 h-5" alt="User Profile" />
+            </button>
+            
+            {token && (
+              <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                <div className="py-2">
+                  <button 
+                    onClick={() => navigate("/profile")}
+                    className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors duration-200"
+                  >
+                    My Profile
+                  </button>
+                  <button
+                    onClick={() => navigate("/orders")}
+                    className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors duration-200"
+                  >
+                    My Orders
+                  </button>
+                  <hr className="my-2 border-gray-200" />
+                  <button 
+                    onClick={logout} 
+                    className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 transition-colors duration-200"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <Link 
+            to="/cart" 
+            className="relative p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300"
+            aria-label="Shopping Cart"
+          >
+            <img 
+              src={assets.cart_icon} 
+              className={`w-5 h-5 transition-all duration-300 ${
+                cartAnimation ? 'animate-bounce scale-110' : ''
+              }`} 
+              alt="Shopping Cart" 
+            />
+            <span className={`absolute -top-1 -right-1 w-5 h-5 bg-blue-600 text-white text-xs font-bold rounded-full flex items-center justify-center transition-all duration-300 ${
+              cartAnimation ? 'scale-125 bg-green-600 animate-pulse' : ''
+            }`}>
+              {getCartCount()}
+            </span>
+          </Link>
+
+          <button
+            onClick={() => setVisible(true)}
+            className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300 lg:hidden"
+            aria-label="Menu"
+          >
+            <img src={assets.menu_icon} className="w-5 h-5" alt="Menu" />
+          </button>
+        </div>
       </div>
 
-      {/* Sidebar menu for small screens */}
+      {/* Mobile Menu Overlay */}
+      {visible && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          onClick={() => setVisible(false)}
+        />
+      )}
+
+      {/* Mobile Menu */}
       <div
-        className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${
-          visible ? "w-full" : "w-0"
+        className={`fixed top-0 right-0 h-full w-80 bg-white shadow-2xl transform transition-transform duration-300 z-50 lg:hidden ${
+          visible ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex flex-col text-gray-600">
-          <div
-            onClick={() => setVisible(false)}
-            className="flex items-center gap-4 p-3 cursor-pointer border-b"
-          >
-            <img className="h-4 rotate-180" src={assets.dropdown_icon} alt="" />
-            <p>Back</p>
+        <div className="flex flex-col h-full">
+          {/* Header */}
+          <div className="flex items-center justify-between p-6 border-b border-gray-200">
+            <div className="flex items-center space-x-3">
+              <img src={assets.logo} className="w-10 h-10 rounded-lg" alt="Logo" />
+              <span className="text-xl font-bold text-gray-900">TeleARGlass</span>
+            </div>
+            <button
+              onClick={() => setVisible(false)}
+              className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200"
+            >
+              <img src={assets.dropdown_icon} className="w-5 h-5 rotate-180" alt="Close" />
+            </button>
           </div>
           
           {/* Navigation Links */}
-          <NavLink
-            onClick={() => setVisible(false)}
-            className="py-3 pl-6 border-b hover:bg-gray-50 transition-colors duration-200"
-            to="/"
-          >
-            HOME
-          </NavLink>
-          <NavLink
-            onClick={() => setVisible(false)}
-            className="py-3 pl-6 border-b hover:bg-gray-50 transition-colors duration-200"
-            to="/teleProducts"
-          >
-            COLLECTION
-          </NavLink>
-          <NavLink
-            onClick={() => setVisible(false)}
-            className="py-3 pl-6 border-b hover:bg-gray-50 transition-colors duration-200"
-            to="/teleServices"
-          >
-            ABOUT
-          </NavLink>
-          <NavLink
-            onClick={() => setVisible(false)}
-            className="py-3 pl-6 border-b hover:bg-gray-50 transition-colors duration-200"
-            to="/contact"
-          >
-            CONTACT
-          </NavLink>
+          <div className="flex-1 py-6">
+            <nav className="space-y-2">
+              <NavLink
+                onClick={() => setVisible(false)}
+                className="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
+                to="/"
+              >
+                <span className="font-medium">Home</span>
+              </NavLink>
+              <NavLink
+                onClick={() => setVisible(false)}
+                className="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
+                to="/teleProducts"
+              >
+                <span className="font-medium">TeleProducts</span>
+              </NavLink>
+              <NavLink
+                onClick={() => setVisible(false)}
+                className="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
+                to="/teleServices"
+              >
+                <span className="font-medium">TeleServices</span>
+              </NavLink>
+              <NavLink
+                onClick={() => setVisible(false)}
+                className="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
+                to="/recuriment"
+              >
+                <span className="font-medium">Recruitment</span>
+              </NavLink>
+              <NavLink
+                onClick={() => setVisible(false)}
+                className="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
+                to="/contact"
+              >
+                <span className="font-medium">Contact</span>
+              </NavLink>
+            </nav>
 
-          {/* User Menu Items (only show if logged in) */}
-          {token && (
-            <>
-              <div className="border-t border-b my-2"></div>
-              <div
-                onClick={() => {
-                  setVisible(false);
-                  navigate("/orders");
-                }}
-                className="py-3 pl-6 border-b hover:bg-gray-50 transition-colors duration-200 cursor-pointer"
-              >
-                MY ORDERS
+            {/* User Menu Items */}
+            {token && (
+              <div className="mt-8 pt-6 border-t border-gray-200">
+                <div className="space-y-2">
+                  <button 
+                    onClick={() => {
+                      setVisible(false);
+                      navigate("/profile");
+                    }}
+                    className="w-full flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
+                  >
+                    <span className="font-medium">My Profile</span>
+                  </button>
+                  <button
+                    onClick={() => {
+                      setVisible(false);
+                      navigate("/orders");
+                    }}
+                    className="w-full flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
+                  >
+                    <span className="font-medium">My Orders</span>
+                  </button>
+                  <button
+                    onClick={() => {
+                      setVisible(false);
+                      logout();
+                    }}
+                    className="w-full flex items-center px-6 py-3 text-red-600 hover:bg-red-50 transition-colors duration-200"
+                  >
+                    <span className="font-medium">Logout</span>
+                  </button>
+                </div>
               </div>
-              <div
-                onClick={() => {
-                  setVisible(false);
-                  logout();
-                }}
-                className="py-3 pl-6 hover:bg-gray-50 transition-colors duration-200 cursor-pointer text-red-600"
-              >
-                LOGOUT
-              </div>
-            </>
-          )}
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </nav>
   );
 }
 

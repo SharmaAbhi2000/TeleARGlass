@@ -62,23 +62,28 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/products" className="hover:text-sky-400 transition">
+                <Link to="/teleProducts" className="hover:text-sky-400 transition">
                   TeleProducts
                 </Link>
               </li>
               <li>
-                <Link to="/deals" className="hover:text-sky-400 transition">
+                <Link to="/teleServices" className="hover:text-sky-400 transition">
                   TeleServices
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" className="hover:text-sky-400 transition">
-                  About Us
                 </Link>
               </li>
               <li>
                 <Link to="/contact" className="hover:text-sky-400 transition">
                   Contact Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/recuriment" className="hover:text-sky-400 transition">
+                  Recruitment
+                </Link>
+              </li>
+              <li>
+                <Link to="/cart" className="hover:text-sky-400 transition">
+                  Cart
                 </Link>
               </li>
             </ul>
@@ -91,33 +96,28 @@ const Footer = () => {
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/account" className="hover:text-sky-400 transition">
-                  My Account
-                </Link>
-              </li>
-              <li>
                 <Link to="/orders" className="hover:text-sky-400 transition">
                   Order History
                 </Link>
               </li>
               <li>
-                <Link to="/faq" className="hover:text-sky-400 transition">
-                  FAQs
+                <Link to="/cart" className="hover:text-sky-400 transition">
+                  Shopping Cart
                 </Link>
               </li>
               <li>
-                <Link to="/shipping" className="hover:text-sky-400 transition">
-                  Shipping Policy
+                <Link to="/place-order" className="hover:text-sky-400 transition">
+                  Place Order
                 </Link>
               </li>
               <li>
-                <Link to="/returns" className="hover:text-sky-400 transition">
-                  Returns & Refunds
+                <Link to="/verify" className="hover:text-sky-400 transition">
+                  Verify Account
                 </Link>
               </li>
               <li>
-                <Link to="/privacy" className="hover:text-sky-400 transition">
-                  Privacy Policy
+                <Link to="/contact" className="hover:text-sky-400 transition">
+                  Support
                 </Link>
               </li>
             </ul>

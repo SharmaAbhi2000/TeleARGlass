@@ -56,24 +56,16 @@ export default function Preorder() {
           <div className="space-y-4">
           
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 space-y-3 border border-cyan-300/20">
-              <h3 className="font-semibold text-base text-cyan-200">
-                Pre-booking Benefits:
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 space-y-4 border border-cyan-300/20">
+              <h3 className="font-bold text-lg text-cyan-200 text-center">
+                Pre-booking Benefits
               </h3>
-              <ul className="space-y-2 text-sm">
-                <li className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-gradient-to-r from-cyan-300 to-emerald-300 rounded-full"></div>
-                  <span>
-                    Revolutionary Communication Technology
-                  </span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-gradient-to-r from-cyan-300 to-emerald-300 rounded-full"></div>
-                  <span>
-                    Enhanced User Experience with TeleARGlass and PanOS
-                  </span>
-                </li>
-              </ul>
+              <div className="text-center">
+                <h4 className="text-base font-semibold text-white leading-relaxed">
+                  TELE AR GLASS ARE ENTITLED TO RECEIVE<br/>
+                  <span className="text-cyan-300 font-bold">EARLY DELIVERY OF TELEPRODUCTS</span>
+                </h4>
+              </div>
             </div>
           </div>
         </div>
@@ -133,7 +125,16 @@ export default function Preorder() {
                 </div>
               </div>
 
-              <p className="text-gray-600 text-sm">{product.description}</p>
+              <div className="space-y-2">
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full"></div>
+                  <span className="text-sm text-gray-600">Revolutionary Communication Technology</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full"></div>
+                  <span className="text-sm text-gray-600">Enhanced User Experience with TeleARGlass and PanOS</span>
+                </div>
+              </div>
 
               {/* Features */}
               <div>

@@ -1,5 +1,5 @@
 import express from 'express'
-import {placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus, verifyStripe, verifyRazorpay, placePrebookingOrder, updatePrebookingPayment, payRemainingAmount, verifyRemainingPayment, cancelOrderRequest, cancelOrderDirect, replaceOrderRequest, repairOrderRequest, createItemRequest} from '../controllers/orderController.js'
+import {placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus, verifyStripe, verifyRazorpay, placePrebookingOrder, updatePrebookingPayment, payRemainingAmount, verifyRemainingPayment, cancelOrderRequest, cancelOrderDirect, replaceOrderRequest, repairOrderRequest, createItemRequest, submitOrderRating} from '../controllers/orderController.js'
 import adminAuth  from '../middleware/adminAuth.js'
 import authUser from '../middleware/auth.js'
 
@@ -33,5 +33,6 @@ orderRouter.post('/cancel-direct',authUser, cancelOrderDirect)
 orderRouter.post('/replace-request',authUser, replaceOrderRequest)
 orderRouter.post('/repair-request',authUser, repairOrderRequest)
 orderRouter.post('/item-request',authUser, createItemRequest)
+orderRouter.post('/rating',authUser, submitOrderRating)
 
 export default orderRouter

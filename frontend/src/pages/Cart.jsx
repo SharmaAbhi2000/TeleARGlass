@@ -94,7 +94,7 @@ console.log(products);
                           className='w-12 text-center border-0 focus:ring-0 focus:outline-none font-medium text-sm' 
                           type="number" 
                           min={1} 
-                          defaultValue={item.quantity} 
+                          value={item.quantity} 
                         />
                         <button 
                           onClick={() => updateQuantity(item._id, item.size, item.quantity + 1)}

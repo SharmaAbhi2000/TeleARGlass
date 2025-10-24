@@ -18,7 +18,7 @@ const Hero = () => {
             </div>
             <div className="inline-flex gap-2 items-center mb-2">
               <p className="text-3xl md:text-4xl lg:text-5xl text-gray-200 font-light leading-tight">
-                SERVING HUMANITY <span className="text-white font-bold">THROUGH TECHNOLOGY</span>
+                 <span className="text-white font-bold">SERVING HUMANITY THROUGH TECHNOLOGY</span>
               </p>
             </div>
             <p className="text-gray-200 text-base md:text-lg leading-relaxed">

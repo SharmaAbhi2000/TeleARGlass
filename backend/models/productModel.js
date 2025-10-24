@@ -18,6 +18,10 @@ const productSchema = new mongoose.Schema({
   pre_book_price: { type: Number },
   post_book_price: { type: Number },
 
+  // Rating system
+  avg_rating: { type: Number, default: 0 },
+  total_ratings: { type: Number, default: 0 },
+
   date: { type: Number, required: true },
 });
 

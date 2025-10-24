@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ShopContext } from '../context/ShopContext'
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 const Orders = () => {
 
@@ -9,7 +10,9 @@ const Orders = () => {
 
   const [orderData, setorderData] = useState([])
   const [showRequestModal, setShowRequestModal] = useState(false)
-  const [requestForm, setRequestForm] = useState({ orderId: '', itemIndex: -1, type: 'cancel', description: '' })
+  const [requestForm, setRequestForm] = useState({ orderId: '', itemIndex: -1, type: 'repair', description: '' })
+  const [showRatingModal, setShowRatingModal] = useState(false)
+  const [ratingForm, setRatingForm] = useState({ orderId: '', rating: 0, review: '' })
 
   const loadOrderData = async () => {
     try {
@@ -41,7 +44,7 @@ const Orders = () => {
       if (data.success) {
         toast.success('Request submitted')
         setShowRequestModal(false)
-        setRequestForm({ orderId: '', itemIndex: -1, type: 'cancel', description: '' })
+        setRequestForm({ orderId: '', itemIndex: -1, type: 'repair', description: '' })
         await loadOrderData()
       } else {
         toast.error(data.message || 'Failed to submit request')
@@ -52,70 +55,42 @@ const Orders = () => {
     }
   }
 
-  // Helper function to check if order is within time limits
-  const isWithinTimeLimit = (order, limitType) => {
-    const deliveryDate = order.deliveredDate || order.date;
+  // Helper function to check if order is within 9 months for Tele Modify
+  const isWithinTimeLimit = (order) => {
+    const orderDate = order.date; // Use order date instead of delivery date
     const currentTime = Date.now();
-    
-    if (limitType === 'replace') {
-      const fiveDaysInMs = 5 * 24 * 60 * 60 * 1000;
-      return currentTime - deliveryDate <= fiveDaysInMs;
-    } else if (limitType === 'repair') {
-      const threeMonthsInMs = 3 * 30 * 24 * 60 * 60 * 1000; // Approximate
-      return currentTime - deliveryDate <= threeMonthsInMs;
-    }
-    return false;
+    const nineMonthsInMs = 9 * 30 * 24 * 60 * 60 * 1000; // Approximate 9 months
+    return currentTime - orderDate <= nineMonthsInMs;
   };
 
-  // Function to cancel order (direct cancellation)
-  const cancelOrder = async (orderId) => {
-    const reason = prompt('Please provide a reason for cancellation:');
-    if (!reason) return;
 
+  // Function to open rating modal
+  const openRatingModal = (orderId) => {
+    setRatingForm({ orderId, rating: 0, review: '' })
+    setShowRatingModal(true)
+  }
+
+  // Function to submit rating
+  const submitRating = async () => {
     try {
-      const response = await axios.post(backendUrl + '/api/order/cancel-direct', {
-        orderId,
-        reason
-      }, { headers: { token } });
-
-      if (response.data.success) {
-        toast.success(response.data.message);
-        loadOrderData();
+      const { data } = await axios.post(backendUrl + '/api/order/rating', ratingForm, { headers: { token } })
+      if (data.success) {
+        toast.success('Rating submitted successfully!')
+        setShowRatingModal(false)
+        setRatingForm({ orderId: '', rating: 0, review: '' })
+        await loadOrderData()
       } else {
-        toast.error(response.data.message);
+        toast.error(data.message || 'Failed to submit rating')
       }
     } catch (error) {
-      console.log(error);
-      toast.error('Failed to cancel order');
+      console.log(error)
+      toast.error('Failed to submit rating')
     }
-  };
+  }
 
-  // Function to request replacement
-  const requestReplacement = async (orderId) => {
-    const reason = prompt('Please describe the issue requiring replacement:');
-    if (!reason) return;
-
-    try {
-      const response = await axios.post(backendUrl + '/api/order/replace-request', {
-        orderId,
-        reason
-      }, { headers: { token } });
-
-      if (response.data.success) {
-        toast.success(response.data.message);
-        loadOrderData();
-      } else {
-        toast.error(response.data.message);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error('Failed to request replacement');
-    }
-  };
-
-  // Function to request repair
+  // Function to request Tele Modify
   const requestRepair = async (orderId) => {
-    const issue = prompt('Please describe the issue requiring repair:');
+    const issue = prompt('Please describe the modification you need:');
     if (!issue) return;
 
     try {
@@ -132,7 +107,7 @@ const Orders = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error('Failed to request repair');
+      toast.error('Failed to request Tele Modify');
     }
   };
 
@@ -211,7 +186,7 @@ const Orders = () => {
                 <p className='text-gray-600 text-sm'>You haven't placed any orders. Start shopping to see your order history here.</p>
                 <button 
                   onClick={() => navigate('/teleProducts')}
-                  className='mt-4 bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-semibold py-2 px-6 rounded-lg hover:from-teal-700 hover:to-emerald-700 transition-all duration-200 shadow-sm hover:shadow-md'
+                  className='mt-4 bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-sm hover:shadow-md'
                 >
                   Browse Products
                 </button>
@@ -270,13 +245,23 @@ const Orders = () => {
             <div className="p-4 space-y-4">
               {order.items.map((item, itemIndex) => (
                 <div key={itemIndex} className="flex items-start gap-4 text-sm">
-                  <img 
-                    className="w-16 sm:w-20 rounded-lg shadow-md" 
-                    src={item.image && item.image[0] ? item.image[0] : '/placeholder-image.png'} 
-                    alt={item.name} 
-                  />
+                  <Link 
+                    to={`/product/${item._id}`}
+                    className="flex-shrink-0 hover:opacity-80 transition-opacity duration-200"
+                  >
+                    <img 
+                      className="w-16 sm:w-20 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200" 
+                      src={item.image && item.image[0] ? item.image[0] : '/placeholder-image.png'} 
+                      alt={item.name} 
+                    />
+                  </Link>
                   <div className="flex-1">
-                    <p className="font-medium text-gray-900">{item.name}</p>
+                    <Link 
+                      to={`/product/${item._id}`}
+                      className="font-medium text-gray-900 hover:text-blue-600 transition-colors duration-200 cursor-pointer"
+                    >
+                      {item.name}
+                    </Link>
                     <div className="flex items-center gap-3 mt-1 text-gray-700">
                       <p className="text-gray-600">
                         {currency}{item.priceNow > 0 ? item.priceNow : (item.price || 0)}
@@ -288,27 +273,30 @@ const Orders = () => {
                       <p className="text-xs text-blue-600 mt-1">Pre-booking item</p>
                     )}
 
-                    {/* Item-level actions (always available) */}
-                    <div className="flex flex-wrap gap-2 mt-3">
-                      <button
-                        onClick={() => openItemRequestModal(order._id, itemIndex, 'cancel')}
-                        className="bg-red-50 text-red-700 border border-red-200 px-3 py-1.5 text-xs font-medium rounded-md hover:bg-red-100"
-                      >
-                        Cancel Item
-                      </button>
-                      <button
-                        onClick={() => openItemRequestModal(order._id, itemIndex, 'replace')}
-                        className="bg-orange-50 text-orange-700 border border-orange-200 px-3 py-1.5 text-xs font-medium rounded-md hover:bg-orange-100"
-                      >
-                        Replace Item
-                      </button>
-                      <button
-                        onClick={() => openItemRequestModal(order._id, itemIndex, 'repair')}
-                        className="bg-purple-50 text-purple-700 border border-purple-200 px-3 py-1.5 text-xs font-medium rounded-md hover:bg-purple-100"
-                      >
-                        Repair Item
-                      </button>
-                    </div>
+                    {/* Item-level actions - Tele Modify only for orders within 9 months */}
+                    {!order.repairRequest?.isRequested && 
+                     isWithinTimeLimit(order) && (
+                      <div className="flex flex-wrap gap-2 mt-3">
+                        <button
+                          onClick={() => openItemRequestModal(order._id, itemIndex, 'repair')}
+                          className="bg-purple-50 text-purple-700 border border-purple-200 px-3 py-1.5 text-xs font-medium rounded-md hover:bg-purple-100"
+                        >
+                          TeleModify
+                        </button>
+                      </div>
+                    )}
+
+                    {/* Show View Product button even when Tele Modify is not available */}
+                    {(!isWithinTimeLimit(order) || order.repairRequest?.isRequested) && (
+                      <div className="flex flex-wrap gap-2 mt-3">
+                        <Link
+                          to={`/product/${item._id}`}
+                          className="bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1.5 text-xs font-medium rounded-md hover:bg-blue-100 transition-colors duration-200"
+                        >
+                          View Product
+                        </Link>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
@@ -384,48 +372,40 @@ const Orders = () => {
                       Pay Remaining (₹{order.prebooking.remainingAmount})
                     </button>
                   )}
+
+                  {/* Rating Button */}
+                  {!order.rating?.isRated && (
+                    <button
+                      onClick={() => openRatingModal(order._id)}
+                      className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-4 py-2 text-sm font-medium rounded-lg hover:from-yellow-600 hover:to-orange-600 transition-all duration-200 shadow-sm hover:shadow-md"
+                    >
+                      Rate Order
+                    </button>
+                  )}
+
+                  {/* Show rating if already rated */}
+                  {order.rating?.isRated && (
+                    <div className="flex items-center gap-2">
+                      <div className="flex">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <span
+                            key={star}
+                            className={`text-lg ${
+                              star <= order.rating.rating ? 'text-yellow-400' : 'text-gray-300'
+                            }`}
+                          >
+                            ★
+                          </span>
+                        ))}
+                      </div>
+                      <span className="text-sm text-gray-600">
+                        {order.rating.rating}/5
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex gap-2 flex-wrap">
-                {/* Replace Order Button - Only for delivered orders within 5 days */}
-                {order.status === 'Delivered' && 
-                 !order.replaceRequest?.isRequested && 
-                 isWithinTimeLimit(order, 'replace') && (
-                  <button
-                    onClick={() => requestReplacement(order._id)}
-                    className="bg-orange-600 text-white px-4 py-2 text-sm font-medium rounded-lg hover:bg-orange-700 transition-all duration-200 shadow-sm hover:shadow-md"
-                  >
-                    Replace (5 days)
-                  </button>
-                )}
-
-                {/* Free Repair Button - Only for delivered orders within 3 months */}
-                {order.status === 'Delivered' && 
-                 !order.repairRequest?.isRequested && 
-                 isWithinTimeLimit(order, 'repair') && (
-                  <button
-                    onClick={() => requestRepair(order._id)}
-                    className="bg-purple-600 text-white px-4 py-2 text-sm font-medium rounded-lg hover:bg-purple-700 transition-all duration-200 shadow-sm hover:shadow-md"
-                  >
-                    Free Repair (3 months)
-                  </button>
-                )}
-
-                {/* Show message if time limits exceeded */}
-                {order.status === 'Delivered' && 
-                 (!isWithinTimeLimit(order, 'replace') || !isWithinTimeLimit(order, 'repair')) && (
-                  <div className="text-xs text-gray-500 px-4 py-2">
-                    {!isWithinTimeLimit(order, 'replace') && !isWithinTimeLimit(order, 'repair') && 
-                     'Replace (5 days) and Repair (3 months) period has expired'}
-                    {isWithinTimeLimit(order, 'replace') && !isWithinTimeLimit(order, 'repair') && 
-                     'Free repair period (3 months) has expired'}
-                    {!isWithinTimeLimit(order, 'replace') && isWithinTimeLimit(order, 'repair') && 
-                     'Replace period (5 days) has expired'}
-                  </div>
-                )}
-              </div>
             </div>
           </div>
             ))
@@ -438,29 +418,17 @@ const Orders = () => {
       <div className="fixed inset-0 z-50 flex items-center justify-center">
         <div className="absolute inset-0 bg-black/30" onClick={() => setShowRequestModal(false)}></div>
         <div className="relative bg-white w-full max-w-md mx-4 rounded-lg shadow-xl border border-gray-200 p-5">
-          <h3 className="text-lg font-semibold text-gray-900 mb-1 capitalize">{requestForm.type} request</h3>
-          <p className="text-xs text-gray-500 mb-4">Tell us more about your request for this item.</p>
+          <h3 className="text-lg font-semibold text-gray-900 mb-1">Tele Modify Request</h3>
+          <p className="text-xs text-gray-500 mb-4">Tell us about the modification you need for this item.</p>
           <div className="space-y-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Request Type</label>
-              <select
-                value={requestForm.type}
-                onChange={(e) => setRequestForm(prev => ({ ...prev, type: e.target.value }))}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
-              >
-                <option value="cancel">Cancel</option>
-                <option value="replace">Replace</option>
-                <option value="repair">Repair</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Describe the issue / reason</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Describe the modification needed</label>
               <textarea
                 rows={4}
                 value={requestForm.description}
                 onChange={(e) => setRequestForm(prev => ({ ...prev, description: e.target.value }))}
                 className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
-                placeholder="Please add details to help us process your request"
+                placeholder="Please describe the modification you need"
               />
             </div>
           </div>
@@ -473,9 +441,70 @@ const Orders = () => {
             </button>
             <button
               onClick={submitItemRequest}
-              className="px-4 py-2 text-sm rounded-md bg-teal-600 text-white hover:bg-teal-700"
+              className="px-4 py-2 text-sm rounded-md bg-blue-600 text-white hover:bg-blue-700"
             >
               Submit Request
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
+
+    {/* Rating Modal */}
+    {showRatingModal && (
+      <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="absolute inset-0 bg-black/30" onClick={() => setShowRatingModal(false)}></div>
+        <div className="relative bg-white w-full max-w-md mx-4 rounded-lg shadow-xl border border-gray-200 p-5">
+          <h3 className="text-lg font-semibold text-gray-900 mb-1">Rate Your Order</h3>
+          <p className="text-xs text-gray-500 mb-4">How was your experience with this order?</p>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Rating</label>
+              <div className="flex gap-1">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <button
+                    key={star}
+                    onClick={() => setRatingForm(prev => ({ ...prev, rating: star }))}
+                    className={`text-2xl transition-colors ${
+                      star <= ratingForm.rating ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-200'
+                    }`}
+                  >
+                    ★
+                  </button>
+                ))}
+              </div>
+              <p className="text-xs text-gray-500 mt-1">
+                {ratingForm.rating === 0 ? 'Select a rating' : 
+                 ratingForm.rating === 1 ? 'Poor' :
+                 ratingForm.rating === 2 ? 'Fair' :
+                 ratingForm.rating === 3 ? 'Good' :
+                 ratingForm.rating === 4 ? 'Very Good' : 'Excellent'}
+              </p>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Review (Optional)</label>
+              <textarea
+                rows={3}
+                value={ratingForm.review}
+                onChange={(e) => setRatingForm(prev => ({ ...prev, review: e.target.value }))}
+                className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                placeholder="Share your experience..."
+              />
+            </div>
+          </div>
+          <div className="flex justify-end gap-2 mt-4">
+            <button
+              onClick={() => setShowRatingModal(false)}
+              className="px-4 py-2 text-sm rounded-md border border-gray-300 text-gray-700 hover:bg-gray-50"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={submitRating}
+              disabled={ratingForm.rating === 0}
+              className="px-4 py-2 text-sm rounded-md bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
+            >
+              Submit Rating
             </button>
           </div>
         </div>
