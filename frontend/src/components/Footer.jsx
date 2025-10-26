@@ -5,7 +5,6 @@ import {
   Twitter,
   Instagram,
   Mail,
-  Phone,
   MapPin,
   Linkedin,
 } from "lucide-react";
@@ -132,10 +131,6 @@ const Footer = () => {
               <li className="flex items-start">
                 <MapPin size={18} className="mt-0.5 mr-2 text-sky-400" />
                 Rupal Vas, Anandpura, Kadi, Mehsana, GJ 382705, India.
-              </li>
-              <li className="flex items-center">
-                <Phone size={18} className="mr-2 text-sky-400" />
-                +91 78629 39627
               </li>
               <li className="flex items-center">
                 <Mail size={18} className="mr-2 text-sky-400" />

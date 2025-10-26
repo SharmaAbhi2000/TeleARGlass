@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import { Star, Heart, ShoppingCart } from "lucide-react";
+import { Star, ShoppingCart } from "lucide-react";
 import { ShopContext } from "../context/ShopContext";
 
 
 
 export default function Preorder() {
   const {addToCart,products} = useContext(ShopContext);
-  const [isWishlisted, setIsWishlisted] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const preorder=products.find((e)=>e.bestseller===true);
   const [product, setProduct] = useState(null);
@@ -19,12 +18,6 @@ export default function Preorder() {
  if(product==null){
   return <p>comming soon</p>
  }
-  // Calculate discount percentage
-  const discount = product
-    ? Math.round(
-        ((product.price - product.discountPrice) / product.price) * 100
-      )
-    : 0;
 
   return (
     <div className="w-full bg-gradient-to-br from-teal-600 via-blue-700 to-emerald-600 p-6 rounded-xl shadow-xl relative overflow-hidden">
@@ -62,8 +55,9 @@ export default function Preorder() {
               </h3>
               <div className="text-center">
                 <h4 className="text-base font-semibold text-white leading-relaxed">
-                  TELE AR GLASS ARE ENTITLED TO RECEIVE<br/>
-                  <span className="text-cyan-300 font-bold">EARLY DELIVERY OF TELEPRODUCTS</span>
+                  TeleARGlass Consumers are entitled to receive<br/>
+                  <span className="text-cyan-300 font-bold">early delivery of TeleProducts</span>
+                  Delivery Date: 21st March 2026
                 </h4>
               </div>
             </div>
@@ -85,19 +79,6 @@ export default function Preorder() {
                     "https://via.placeholder.com/500x300?text=Product+Image";
                 }}
               />
-              <button
-                onClick={() => setIsWishlisted(!isWishlisted)}
-                className="absolute top-3 right-3 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition-shadow"
-              >
-                <Heart
-                  className={`w-4 h-4 ${
-                    isWishlisted ? "fill-red-500 text-red-500" : "text-gray-400"
-                  }`}
-                />
-              </button>
-              <div className="absolute top-3 left-3 bg-gradient-to-r from-teal-500 to-emerald-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
-                -{discount}%
-              </div>
             </div>
 
             {/* Product Details */}
@@ -139,19 +120,36 @@ export default function Preorder() {
               {/* Features */}
               <div>
                 <h4 className="font-semibold text-gray-800 mb-2 text-sm">
-                  Key Features:
+                  Colour:
+                </h4>
+                <p className="text-sm text-gray-600 mb-3">
+                  Pink, Violet
+                </p>
+                
+                <h4 className="font-semibold text-gray-800 mb-2 text-sm">
+                  Adequate Blend of TeleARGlass Quality & Performance Features:
                 </h4>
                 <ul className="space-y-1">
-                  {product.features &&
-                    JSON.parse(product.features).map((feature, index) => (
-                      <li
-                        key={index}
-                        className="flex items-center space-x-2 text-xs text-gray-600"
-                      >
-                        <div className="w-1.5 h-1.5 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full"></div>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
+                  <li className="flex items-center space-x-2 text-xs text-gray-600">
+                    <div className="w-1.5 h-1.5 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full"></div>
+                    <span>RAM</span>
+                  </li>
+                  <li className="flex items-center space-x-2 text-xs text-gray-600">
+                    <div className="w-1.5 h-1.5 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full"></div>
+                    <span>SSD</span>
+                  </li>
+                  <li className="flex items-center space-x-2 text-xs text-gray-600">
+                    <div className="w-1.5 h-1.5 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full"></div>
+                    <span>GRAPHICS CARD</span>
+                  </li>
+                  <li className="flex items-center space-x-2 text-xs text-gray-600">
+                    <div className="w-1.5 h-1.5 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full"></div>
+                    <span>DISPLAY</span>
+                  </li>
+                  <li className="flex items-center space-x-2 text-xs text-gray-600">
+                    <div className="w-1.5 h-1.5 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full"></div>
+                    <span>PROCESSOR</span>
+                  </li>
                 </ul>
               </div>
 
@@ -201,7 +199,7 @@ export default function Preorder() {
                 </button>
 
                 <p className="text-xs text-gray-500 text-center">
-                  * Pay ₹14,210 now, remaining ₹34,790 before delivery. Cancel anytime.
+                  * Pay ₹14,210 now, remaining ₹34,790 before delivery.
                 </p>
               </div>
             </div>

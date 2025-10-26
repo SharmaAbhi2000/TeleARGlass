@@ -58,24 +58,12 @@ const navigate=useNavigate()
               <Title text1={"TELE"} text2={"FEEDBACK"} />
             </div>
              <p className="text-sm font-bold text-teal-600 mt-2 bg-teal-50 rounded-lg">
-               Please share your feedback about TeleARGlass Products
+               Please Support us by giving your valuable feedback to make better TeleARGlass Products
              </p>
           </div>
 
            <div className="max-w-lg mx-auto p-6 sm:p-8 bg-white border border-gray-200 rounded-xl shadow-sm">
              
-             {/* Feedback Policy Notice */}
-             <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-               <div className="flex items-center gap-2 mb-2">
-                 <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                   <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                 </svg>
-                 <h4 className="text-sm font-semibold text-blue-800">We Value Your Feedback</h4>
-               </div>
-               <p className="text-sm text-blue-700">
-                 <strong>Your Opinion Matters:</strong> Help us improve our TeleARGlass products by sharing your experience and suggestions.
-               </p>
-             </div>
 
             {success && (
               <div className="mb-4 p-3 bg-green-100 border border-green-300 rounded-lg">
@@ -109,7 +97,7 @@ const navigate=useNavigate()
               />
               <textarea
                 name="query"
-                placeholder="Your Query"
+                placeholder="Your Feedback"
                 rows={4}
                 className="w-full border border-gray-300 rounded-lg p-3 resize-none focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200"
                 value={formData.query}
