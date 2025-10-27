@@ -56,8 +56,8 @@ export default function Preorder() {
               <div className="text-center">
                 <h4 className="text-base font-semibold text-white leading-relaxed">
                   TeleARGlass Consumers are entitled to receive<br/>
-                  <span className="text-cyan-300 font-bold">early delivery of TeleProducts</span>
-                  Delivery Date: 21st March 2026
+                  <span className="text-cyan-300 font-bold">early delivery of TeleProducts<br></br>Delivery Date: 21st March 2026</span>
+                  
                 </h4>
               </div>
             </div>
