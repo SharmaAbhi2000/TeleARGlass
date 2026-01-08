@@ -25,11 +25,11 @@ ssh ubuntu@your-aws-instance-ip
 cd telearglass
 
 # Make scripts executable
-chmod +x docker/aws-deploy.sh
+chmod +x docker/deploy.sh
 chmod +x docker/setup-ssl.sh
 
 # Run the AWS deployment script
-./docker/aws-deploy.sh
+./docker/deploy.sh
 ```
 
 ### Step 3: Setup SSL (Optional but Recommended)
@@ -128,7 +128,7 @@ NODE_ENV=production
 
 ## 🚀 Deployment Scripts
 
-### aws-deploy.sh
+### deploy.sh
 Complete deployment script that:
 - Installs Docker and Docker Compose
 - Configures firewall
@@ -288,7 +288,7 @@ If you encounter issues:
 - [ ] Domain DNS configured
 - [ ] `.env` file created with all variables
 - [ ] Project uploaded to AWS instance
-- [ ] `aws-deploy.sh` executed successfully
+- [ ] `deploy.sh` executed successfully
 - [ ] SSL certificates installed
 - [ ] Application accessible via domain
 - [ ] Monitoring and backup procedures in place
